@@ -834,7 +834,7 @@ function goExploreCareer(){
     computeCareerMatches();
   }
   renderCareerGrid(state.filter||'all');
-  document.getElementById('career-sub').textContent='Jelajahi 30 karier masa depan dan dampak AI pada setiap bidang';
+  document.getElementById('career-sub').textContent='Jelajahi 58 karier masa depan dan dampak AI pada setiap bidang';
   const backBtn=document.getElementById('s3-back-btn');
   backBtn.textContent='← Beranda';backBtn.onclick=()=>goScreen(0);
   document.getElementById('s3').querySelector('.btn-p').style.display='none';
@@ -1000,7 +1000,7 @@ function goResults(){
 function copyResults(){
   const arch=getArchetype(),sc=state.scores;
   const top3=state.topCareers.slice(0,3).map(c=>c.name).join(', ');
-  const txt='LifeQuest — Hasil Assessment '+state.name+'\nArketipe: '+arch.id+' ('+arch.en+')\nRIASEC: R'+sc.R+' I'+sc.I+' A'+sc.A+' S'+sc.S+' E'+sc.E+' C'+sc.C+'\nTop Karier: '+top3+'\nPlatform: https://lifequest.medinovatech.com/app/';
+  const txt='LifeQuest — Hasil Assessment '+state.name+'\nArketipe: '+arch.id+' ('+arch.en+')\nRIASEC: R'+sc.R+' I'+sc.I+' A'+sc.A+' S'+sc.S+' E'+sc.E+' C'+sc.C+'\nTop Karier: '+top3+'\nPlatform: https://lifequest.medinovatech.com/';
   navigator.clipboard.writeText(txt).then(()=>alert('Hasil disalin ke clipboard!')).catch(()=>alert(txt));
 }
 function restartApp(){
