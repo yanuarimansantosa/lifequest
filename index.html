@@ -1014,8 +1014,7 @@ function renderIkigaiStep(){
         <div class="ikigai-label">Pilih 2-3 passion kamu</div>
         <div class="ikigai-tag-input">
           ${ikigaiState.passion.map(p=>`<span class="ikigai-tag">${p}<button type="button" onclick="removeIkigaiTag('passion','${p}')">×</button></span>`).join('')}
-          <input type="text" id="passion-inp" placeholder="Dari hobi & jago, pilih passion..." list="passion-list"/>
-          <datalist id="passion-list">${[...ikigaiState.hobi,...ikigaiState.jago].map(x=>`<option>${x}</option>`).join('')}</datalist>
+          <input type="text" id="passion-inp" placeholder="Ketik dari hobi & jago kamu..." onkeypress="ikigaiTagInput(event,'passion')"/>
         </div>
       </div>
       <div class="ikigai-nav">
