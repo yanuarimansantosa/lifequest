@@ -421,6 +421,11 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
 <!-- S0.5: ASSESSMENT PATH CHOICE -->
 <section id="s0-5" class="screen">
   <div class="inner">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:.85rem;color:var(--muted)">
+      <a href="javascript:goScreen(0)" style="color:var(--primary);text-decoration:none;cursor:pointer">Home</a>
+      <span>/</span>
+      <span>Kenali Dirimu</span>
+    </div>
     <div class="badge">Kenali Dirimu</div>
     <h2 style="font-size:1.55rem;font-weight:900;margin-bottom:8px">Pilih Cara Mengenal Diri</h2>
     <p style="color:var(--muted);font-size:.87rem;line-height:1.65;margin-bottom:24px">Dua pilihan untuk menemukan passion dan karier yang cocok untukmu.</p>
@@ -441,6 +446,7 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
           <span class="menu-tag">10 menit</span>
           <span class="menu-tag">Comprehensive</span>
         </div>
+        <svg class="menu-card-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
       </div>
 
       <div class="menu-card" onclick="goScreen('s1b')">
@@ -458,6 +464,7 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
           <span class="menu-tag">2 menit</span>
           <span class="menu-tag">Focused</span>
         </div>
+        <svg class="menu-card-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
       </div>
     </div>
 
@@ -484,6 +491,11 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
 <!-- S1b: IKIGAI QUICK ASSESSMENT -->
 <section id="s1b" class="screen">
   <div class="inner">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:.85rem;color:var(--muted)">
+      <a href="javascript:goScreen(0)" style="color:var(--primary);text-decoration:none;cursor:pointer">Home</a>
+      <span>/</span>
+      <span>Ikigai Quick</span>
+    </div>
     <div id="ikigai-step" class="ikigai-step"></div>
   </div>
 </section>
