@@ -1194,7 +1194,7 @@ function renderCareerGrid(f){
   document.getElementById('career-sub').textContent='Berdasarkan profil RIASEC kamu'+(t?' — membantu '+t.l.toLowerCase():'')+(p?' di bidang '+p.l.toLowerCase():'');
   const list=f==='all'?state.topCareers:state.topCareers.filter(c=>c.cat===f);
   document.getElementById('career-grid').innerHTML=list.map(c=>`
-    <div class="career-card${state.selectedIds.includes(c.id)?' sel':''}" onclick="toggleCareer('${c.id}',this)" id="cc-${c.id}">
+    <div class="career-card${state.selectedIds.includes(c.id)?' sel':''}" onclick="openCareerIntel('${c.id}',3)" id="cc-${c.id}" style="cursor:pointer">
       <div class="c-icon">${c.icon}</div>
       <div class="c-body">
         <div class="c-name">${c.name}</div>
@@ -1207,7 +1207,7 @@ function renderCareerGrid(f){
           <span class="pill pill-hum" title="Human Advantage">♥ ${c.human}</span>
           <span class="pill pill-imp" title="Social Impact">◆ ${c.impact}</span>
         </div>
-        <button class="btn-detail" onclick="event.stopPropagation();openCareerIntel('${c.id}',3)">
+        <button class="btn-detail" onclick="event.stopPropagation();openCareerIntel('${c.id}',3)" style="display:none">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="5"/><path d="M6 5v3M6 4v.5"/></svg>
           Career MRI
         </button>
