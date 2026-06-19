@@ -56,13 +56,12 @@ index.html (single file SPA — 255KB)
 
 ## 🔄 Phase 2 — IN PROGRESS (Expansion & Career Pathways)
 
-### Pending Tasks (Jun 19)
+### Task Status (Jun 19)
 
 #### Task 1: Update Filter Buttons to 11 Sectors
-**Status:** PENDING | Est. 15 min
-- Current: 4 static buttons (Semua, Kesehatan, Teknologi, Bisnis)
-- Target: 12 buttons (all, health, it, biz, arts, media, science, edu, social, eng, security, sports)
-- Location: index.html lines 424-427
+**Status:** ✅ COMPLETE (Jun 19, commit 468e793)
+- ✅ 12 buttons implemented (Semua + 11 sectors)
+- Location: index.html lines 424-435
 
 #### Task 2: Career Pathway Section ("Peta Jalan Karier")
 **Status:** PENDING | Est. 3-4 hours total
@@ -136,7 +135,7 @@ KAMPUS_DB = {
 - ✅ All 11 sectors complete (5 each)
 
 ### THIS WEEK (Jun 20)
-- [ ] Update filter buttons (15 min)
+- [x] ~~Update filter buttons~~ (Jun 19, done)
 - [ ] Code Peta Jalan UI (1-2 hours)
 - [ ] Populate PATHWAY_DATA (2-3 hours)
 - [ ] Integrate & QA (1 hour)
