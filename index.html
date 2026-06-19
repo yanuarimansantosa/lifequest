@@ -1011,11 +1011,13 @@ function renderIkigaiStep(){
       <p class="ikigai-subtitle">${inter.length?'Lihat perpotongan antara yang kamu suka dan yang kamu jago:':'Tidak ada perpotongan? Itu OK. Pilih yang mau dikuasain atau yang paling suka dari daftar di bawah.'}</p>
       ${inter.length?`<div class="ikigai-intersection"><div class="ikigai-intersection-title">💡 Passion (Intersection)</div><div class="ikigai-intersection-tags">${inter.map(p=>`<span class="ikigai-tag">${p}</span>`).join('')}</div></div>`:''}
       <div class="ikigai-input-group">
-        <div class="ikigai-label">Pilih 2-3 passion kamu</div>
-        <div class="ikigai-tag-input">
-          ${ikigaiState.passion.map(p=>`<span class="ikigai-tag">${p}<button type="button" onclick="removeIkigaiTag('passion','${p}')">×</button></span>`).join('')}
-          <input type="text" id="passion-inp" placeholder="Ketik dari hobi & jago kamu..." onkeypress="ikigaiTagInput(event,'passion')"/>
+        <div class="ikigai-label">Pilih 2-3 passion kamu (tap dari hobi & jago)</div>
+        <div class="ikigai-tag-input" style="display:flex;flex-wrap:wrap;gap:8px;padding:12px;cursor:auto">
+          ${[...ikigaiState.hobi,...ikigaiState.jago].map(item=>`
+            <button type="button" class="chip" style="padding:8px 16px;background:${ikigaiState.passion.includes(item)?'var(--primary)':'var(--bg-card2)'};color:${ikigaiState.passion.includes(item)?'#fff':'var(--text)'};border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:.85rem;transition:all .2s;font-weight:500" onclick="toggleIkigaiPassion('${item}')">${item}</button>
+          `).join('')}
         </div>
+        <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">${ikigaiState.passion.map(p=>`<span class="ikigai-tag">${p}<button type="button" onclick="removeIkigaiTag('passion','${p}')">×</button></span>`).join('')}</div>
       </div>
       <div class="ikigai-nav">
         <button class="btn-s" onclick="ikigaiState.step=2;renderIkigaiStep()">&#8592; Kembali</button>
@@ -1061,6 +1063,7 @@ function renderIkigaiStep(){
 
 function ikigaiTagInput(e,field){if(e.key==='Enter'){e.preventDefault();const v=e.target.value.trim();if(v)ikigaiState[field].push(v);e.target.value='';renderIkigaiStep();}}
 function removeIkigaiTag(field,tag){ikigaiState[field]=ikigaiState[field].filter(x=>x!==tag);renderIkigaiStep();}
+function toggleIkigaiPassion(item){if(ikigaiState.passion.includes(item)){ikigaiState.passion=ikigaiState.passion.filter(x=>x!==item);}else{ikigaiState.passion.push(item);}renderIkigaiStep();}
 function ikigaiStep2(){ikigaiState.step=2;renderIkigaiStep();}
 function ikigaiStep3(){ikigaiState.step=3;renderIkigaiStep();}
 function ikigaiStep4(){ikigaiState.step=4;renderIkigaiStep();}
