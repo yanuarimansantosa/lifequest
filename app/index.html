@@ -50,6 +50,27 @@ main{padding-top:56px;min-height:100vh}
 [data-theme="dark"] .w-h em{color:var(--teal)}
 .w-sub{color:var(--muted);font-size:.95rem;line-height:1.75;letter-spacing:.4px;margin-bottom:28px;font-weight:400}
 
+/* ── HOME MENU CARDS ── */
+.home-menu{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.menu-card{position:relative;background:var(--bg-card);border:1.5px solid var(--border);border-radius:16px;padding:22px 22px 20px;cursor:pointer;transition:all 220ms cubic-bezier(.4,0,.2,1);overflow:hidden;text-align:left}
+.menu-card:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,106,101,.15)}
+.menu-card::before{content:'';position:absolute;inset:0;border-radius:16px;opacity:0;background:linear-gradient(135deg,rgba(0,106,101,.06),transparent);transition:opacity 220ms ease}
+.menu-card:hover::before{opacity:1}
+.menu-card-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.menu-card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.menu-card-icon.teal{background:linear-gradient(135deg,rgba(0,106,101,.18),rgba(119,243,235,.12));border:1px solid rgba(0,106,101,.2)}
+.menu-card-icon.indigo{background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(139,92,246,.1));border:1px solid rgba(99,102,241,.2)}
+.menu-card-label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.menu-card-label.teal{color:var(--primary)}
+[data-theme="dark"] .menu-card-label.teal{color:var(--teal)}
+.menu-card-label.indigo{color:#6366f1}
+.menu-card-title{font-size:1.08rem;font-weight:900;color:var(--text);line-height:1.25}
+.menu-card-desc{font-size:.82rem;color:var(--muted);line-height:1.65;letter-spacing:.3px;margin-bottom:14px}
+.menu-card-tags{display:flex;flex-wrap:wrap;gap:6px}
+.menu-tag{padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;background:var(--bg-card2);color:var(--subtle);border:1px solid var(--border)}
+.menu-card-arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);opacity:.3;transition:all 220ms ease}
+.menu-card:hover .menu-card-arrow{opacity:1;transform:translateY(-50%) translateX(3px);color:var(--primary)}
+/* legacy pillars fallback */
 .pillars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
 .pillar{background:var(--bg-card);border:1px solid var(--border);border-radius:11px;padding:16px;display:flex;align-items:flex-start;gap:12px;transition:all 200ms cubic-bezier(.4,0,.2,1)}
 .pillar:hover{border-color:var(--primary);box-shadow:0 2px 8px rgba(0,0,0,.1)}
@@ -257,36 +278,65 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
 <!-- S0: WELCOME -->
 <section id="s0" class="screen active">
   <div class="inner">
-    <div class="badge fu">Self-Discovery Platform</div>
-    <h1 class="w-h fu" style="transition-delay:.06s">Temukan <em>Tujuan Hidupmu.</em><br>Bangun Masa Depanmu.</h1>
-    <p class="w-sub fu" style="transition-delay:.12s">Jawab 36 pertanyaan RIASEC, pilih misi hidupmu, dan eksplorasi 30+ karier masa depan — lengkap dengan skor AI Risk, pertumbuhan, dan dampak sosial.</p>
+    <div class="badge fu">Platform Karier &amp; Kehidupan</div>
+    <h1 class="w-h fu" style="transition-delay:.06s">Temukan <em>Tujuanmu.</em><br>Bangun Dampakmu.</h1>
+    <p class="w-sub fu" style="transition-delay:.12s">Temukan orang-orang yang ingin kamu bantu, masalah yang layak diselesaikan, dan keterampilan yang dibutuhkan untuk menciptakan masa depan yang bermakna.</p>
 
-    <div class="pillars fu" style="transition-delay:.16s">
-      <div class="pillar"><div class="pillar-icon">🧬</div><div><div class="pillar-t">RIASEC Assessment</div><div class="pillar-d">6 dimensi minat &amp; bakat ilmiah</div></div></div>
-      <div class="pillar"><div class="pillar-icon">🎯</div><div><div class="pillar-t">Mission Builder</div><div class="pillar-d">Target + Problem + Approach = Misimu</div></div></div>
-      <div class="pillar"><div class="pillar-icon">🚀</div><div><div class="pillar-t">Career Universe</div><div class="pillar-d">30+ karier + AI Risk &amp; Growth score</div></div></div>
-      <div class="pillar"><div class="pillar-icon">🗺️</div><div><div class="pillar-t">Skill Roadmap</div><div class="pillar-d">Skill gap &amp; jalur karier kamu</div></div></div>
+    <div class="home-menu fu" style="transition-delay:.16s">
+
+      <!-- Menu 1: Kenali Diri -->
+      <div class="menu-card" onclick="goAssess()">
+        <div class="menu-card-head">
+          <div class="menu-card-icon teal">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#006a65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="8" r="4"/>
+              <path d="M3 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+              <path d="M14 6l2-2M8 6L6 4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="menu-card-label teal">Self-Discovery</div>
+            <div class="menu-card-title">Kenali Dirimu</div>
+          </div>
+        </div>
+        <p class="menu-card-desc">Jawab 36 pertanyaan RIASEC, temukan misimu, dan dapatkan peta karier yang cocok dengan kepribadian dan nilai-nilaimu.</p>
+        <div class="menu-card-tags">
+          <span class="menu-tag">RIASEC Assessment</span>
+          <span class="menu-tag">Mission Builder</span>
+          <span class="menu-tag">Career Match</span>
+          <span class="menu-tag">± 8 menit</span>
+        </div>
+        <svg class="menu-card-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+      </div>
+
+      <!-- Menu 2: Career Intelligence -->
+      <div class="menu-card" onclick="goExploreCareer()">
+        <div class="menu-card-head">
+          <div class="menu-card-icon indigo">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="9"/>
+              <path d="M11 6v5l3 3"/>
+              <path d="M6 11h1M15 11h1M11 6v1M11 15v1"/>
+            </svg>
+          </div>
+          <div>
+            <div class="menu-card-label indigo">Career Intelligence</div>
+            <div class="menu-card-title">Jelajahi Karier Masa Depan</div>
+          </div>
+        </div>
+        <p class="menu-card-desc">Lihat 30 karier dalam era AI — dampak otomasi, skill yang tetap aman, dan strategi adaptasi 12 bulan yang bisa langsung kamu jalankan.</p>
+        <div class="menu-card-tags">
+          <span class="menu-tag">AI Impact Analysis</span>
+          <span class="menu-tag">Career MRI</span>
+          <span class="menu-tag">Roadmap Adaptasi</span>
+          <span class="menu-tag">30 karier</span>
+        </div>
+        <svg class="menu-card-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+      </div>
+
     </div>
 
-    <div class="form-row fu" style="transition-delay:.2s">
-      <input id="inp-name" type="text" placeholder="Nama kamu" autocomplete="given-name"/>
-      <select id="inp-grade">
-        <option value="">Kelas / Status</option>
-        <option value="sma10">SMA/SMK Kelas 10</option>
-        <option value="sma11">SMA/SMK Kelas 11</option>
-        <option value="sma12">SMA/SMK Kelas 12</option>
-        <option value="gap">Gap Year</option>
-        <option value="mhs">Mahasiswa</option>
-        <option value="fresh">Fresh Graduate</option>
-        <option value="prof">Profesional</option>
-      </select>
-    </div>
-
-    <button class="btn-p fu" style="transition-delay:.24s" onclick="goAssess()">
-      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5h10M9 4l4.5 4.5L9 13"/></svg>
-      Mulai Assessment RIASEC
-    </button>
-    <p class="note fu" style="transition-delay:.28s">&#177; 8 menit &nbsp;&middot;&nbsp; Gratis &nbsp;&middot;&nbsp; Tanpa login &nbsp;&middot;&nbsp; Data tersimpan di browser</p>
+    <p class="note fu" style="transition-delay:.26s">Gratis &nbsp;&middot;&nbsp; Tanpa login &nbsp;&middot;&nbsp; Data tersimpan di browser</p>
   </div>
 </section>
 
@@ -354,7 +404,7 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
     <div id="career-grid" class="career-grid"></div>
     <p class="sel-hint" id="sel-hint">Ketuk kartu untuk memilih karier yang menarik untukmu</p>
     <div style="display:flex;gap:10px;margin-top:20px">
-      <button class="btn-s" onclick="goScreen(2)">&#8592; Ubah Misi</button>
+      <button class="btn-s" id="s3-back-btn" onclick="goScreen(2)">&#8592; Kembali</button>
       <button class="btn-p" onclick="goResults()">Lihat Hasil Lengkap &#8594;</button>
     </div>
   </div>
@@ -696,10 +746,18 @@ function updateProgress(){const pct=(state.pg/4)*100;document.getElementById('pr
 function goScreen(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s'+n).classList.add('active');state.pg=n;updateProgress();window.scrollTo({top:0,behavior:'smooth'});}
 
 // S0
-function goAssess(){
-  const nm=document.getElementById('inp-name').value.trim();
-  if(!nm){const el=document.getElementById('inp-name');el.style.borderColor='#ef4444';el.focus();setTimeout(()=>el.style.borderColor='',800);return;}
-  state.name=nm;state.grade=document.getElementById('inp-grade').value;state.apg=0;saveState();renderAssessPage();goScreen(1);
+function goAssess(){goScreen(1);state.apg=0;saveState();renderAssessPage();}
+function goExploreCareer(){
+  if(!state.topCareers||!state.topCareers.length){
+    DIMS_ORDER.forEach(d=>state.scores[d]=60);
+    computeCareerMatches();
+  }
+  renderCareerGrid(state.filter||'all');
+  document.getElementById('career-sub').textContent='Jelajahi 30 karier masa depan dan dampak AI pada setiap bidang';
+  const backBtn=document.getElementById('s3-back-btn');
+  backBtn.textContent='← Beranda';backBtn.onclick=()=>goScreen(0);
+  document.getElementById('s3').querySelector('.btn-p').style.display='none';
+  goScreen(3);
 }
 
 // S1
@@ -766,7 +824,13 @@ function updateMissionPreview(){
   if(t||p||a){el.innerHTML='<strong>Misi:</strong> Meningkatkan <strong>'+(p?p.l.toLowerCase():'[pilih problem]')+'</strong> bagi <strong>'+(t?t.l.toLowerCase():'[pilih target]')+'</strong> melalui pendekatan <strong>'+(a?a.l:'[pilih approach]')+'</strong>.';}
   else{el.textContent='Pilih kombinasi di atas untuk melihat pernyataan misi kamu...';}
 }
-function goCareer(){computeCareerMatches();renderCareerGrid(state.filter||'all');goScreen(3);}
+function goCareer(){
+  computeCareerMatches();renderCareerGrid(state.filter||'all');
+  const backBtn=document.getElementById('s3-back-btn');
+  backBtn.textContent='← Ubah Misi';backBtn.onclick=()=>goScreen(2);
+  document.getElementById('s3').querySelector('.btn-p').style.display='';
+  goScreen(3);
+}
 
 // S3
 function computeCareerMatches(){
