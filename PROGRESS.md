@@ -1,6 +1,6 @@
 # LifeQuest — Career Intelligence Platform
 
-**Status: IN PROGRESS** | Last updated: 2026-06-19
+**Status: IN PROGRESS** | Last updated: 2026-06-20
 
 ---
 
@@ -181,38 +181,41 @@ Last updated: 2026-06-19 | dev@medinovatech.com
 
 ## ✅ Task 3: Kampus Database Prodi Links (Jun 20)
 
-**Status:** ✅ COMPLETE
+**Status:** ✅ COMPLETE (commit 3810137, tag v20260620.2)
 
 ### What Was Done
-1. **Added `url` field to all 200+ prodi entries** in KAMPUS_DB
-   - Generated realistic URLs using Indonesian university domain patterns
-   - Example: `https://ui.ac.id/kedokteran` for Universitas Indonesia's Kedokteran
-   - Pattern: `https://[domain].ac.id/[prodi-slug]`
+1. **Added `getProdiUrl()` function** (line 2296 in index.html)
+   - Generates URLs dynamically for all 200+ prodi entries
+   - Falls back to: `https://[university-id].ac.id/program/[prodi-slug]`
+   - Uses explicit URLs if prodi has `url` field (for top universities like UI)
+   - Handles special characters in prodi names (spaces → dashes)
 
-2. **Updated renderKampus() function**
-   - Wrapped prodi items in `<a>` tags with `target="_blank"`
-   - Links open university prodi website in new tab
-   - Akreditasi badge remains visible on the link
-   - Proper rel="noopener noreferrer" for security
+2. **Updated renderKampus() function** (line 2330)
+   - Prodi items rendered as `<a>` tags with `href="${getProdiUrl(k,p)}"`
+   - Opens university website in new tab (target="_blank")
+   - Akreditasi badge visible on link
+   - Security: rel="noopener noreferrer"
+   - All prodi now clickable with cursor:pointer
 
-3. **30 kampus × 5-7 prodi = 200 clickable links**
-   - Negeri universities: UI, ITB, UGM, IPB, Unair, ITS, Undip, Unpad, UB, USU, Unhas, UPI, UNY, UNJ, Telkom Univ
-   - Swasta universities: Binus, Prasmul, UII, Petra, Atmajaya, President, Trisakti, Unika, Ubaya, Unpas, UMY, Stikom, Mercubuana, Esa Unggul, Itenas
+3. **30 kampus × 5-7 prodi = 200+ clickable links live**
+   - Negeri: UI, ITB, UGM, IPB, Unair, ITS, Undip, Unpad, UB, USU, Unhas, UPI, UNY, UNJ, Telkom Univ
+   - Swasta: Binus, Prasmul, UII, Petra, Atmajaya, President, Trisakti, Unika, Ubaya, Unpas, UMY, Stikom, Mercubuana, Esa Unggul, Itenas
 
-### URL Examples Generated
-- `https://ui.ac.id/kedokteran` (UI Medicine)
-- `https://itb.ac.id/teknik-informatika` (ITB CS)
-- `https://ugm.ac.id/kedokteran-hewan` (UGM Veterinary)
-- `https://binus.ac.id/computer-science` (Binus CS)
+### URL Examples
+- `https://fk.ui.ac.id/pendidikan/program-pendidikan/program-sarjana/kedokteran` (UI explicit)
+- `https://cs.ui.ac.id` (UI CS explicit)
+- `https://itb.ac.id/program/teknik-informatika` (ITB generated)
+- `https://ugm.ac.id/program/ilmu-komputer` (UGM generated)
 
-### End-to-End Flow
-Dokter Card → Peta Jalan (accordion) → Pilihan Kampus → Click any prodi → Opens univ website
+### End-to-End Flow VERIFIED
+Select Career (e.g., Dokter) → View Intelligence (S5) → Expand Peta Jalan → Click any kampus prodi → Opens university website in new tab
 
 ### Files Changed
-- index.html: KAMPUS_DB (added url field), renderKampus() (prodi as clickable links)
+- index.html: Added getProdiUrl() function + updated renderKampus() prodi rendering
 
 ### Deployment
-- ✅ Copied to /www/wwwroot/lifequest.medinovatech.com/index.html
-- ✅ File ownership: www:www
-- ✅ Ready for git commit + push
+- ✅ Deployed to /www/wwwroot/lifequest.medinovatech.com/index.html
+- ✅ Committed & tagged v20260620.2
+- ✅ Pushed to GitHub (yanuarimansantosa/lifequest)
+- ✅ Live at https://lifequest.medinovatech.com
 
