@@ -192,29 +192,24 @@ img{max-width:100%;display:block;}
   margin:0 auto 2.5rem;line-height:1.72;
 }
 
-.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:2.75rem;}
-.pill{
-  display:inline-flex;align-items:center;gap:.45rem;
-  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);
-  border-radius:24px;padding:.42rem .95rem;
-  font-size:.8rem;font-weight:600;color:rgba(255,255,255,.68);
-  transition:all .25s ease;backdrop-filter:blur(4px);cursor:default;
-}
-.pill:hover{background:rgba(0,106,101,.18);border-color:rgba(119,243,235,.28);color:#77f3eb;transform:translateY(-2px);}
-.pill svg{width:13px;height:13px;flex-shrink:0;}
-
-.hero-ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:.85rem;}
-.btn-hero{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.82rem 1.9rem;border-radius:40px;
-  font-family:'Figtree',sans-serif;font-weight:700;font-size:.97rem;letter-spacing:-.01em;
-  transition:all .25s ease;
-}
-.btn-hero-p{background:#006a65;color:#fff;box-shadow:0 0 32px rgba(0,106,101,.38);}
-.btn-hero-p:hover{background:#008f89;transform:translateY(-2px);box-shadow:0 0 44px rgba(0,106,101,.55);}
-.btn-hero-s{background:rgba(255,255,255,.055);color:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.14);}
-.btn-hero-s:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);transform:translateY(-2px);}
-.btn-hero svg{width:17px;height:17px;}
+.hero-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:2.5rem;max-width:560px;margin-left:auto;margin-right:auto;}
+.hcard{position:relative;background:rgba(255,255,255,.045);border:1.5px solid rgba(255,255,255,.1);border-radius:16px;padding:20px 22px;cursor:pointer;transition:all 220ms cubic-bezier(.4,0,.2,1);overflow:hidden;text-align:left;text-decoration:none;display:block;}
+.hcard:hover{border-color:rgba(119,243,235,.35);transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,0,0,.3),0 0 24px rgba(0,106,101,.15);}
+.hcard::before{content:'';position:absolute;inset:0;border-radius:16px;opacity:0;background:linear-gradient(135deg,rgba(0,106,101,.1),transparent);transition:opacity 220ms ease;}
+.hcard:hover::before{opacity:1;}
+.hcard-head{display:flex;align-items:center;gap:14px;margin-bottom:9px;}
+.hcard-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.hcard-icon.teal{background:linear-gradient(135deg,rgba(0,106,101,.25),rgba(119,243,235,.1));border:1px solid rgba(0,106,101,.3);}
+.hcard-icon.indigo{background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(139,92,246,.1));border:1px solid rgba(99,102,241,.25);}
+.hcard-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;}
+.hcard-label.teal{color:#77f3eb;}
+.hcard-label.indigo{color:#a5b4fc;}
+.hcard-title{font-size:1.05rem;font-weight:900;color:#fff;line-height:1.25;}
+.hcard-desc{font-size:.81rem;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:13px;}
+.hcard-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.hcard-tag{padding:3px 10px;border-radius:20px;font-size:.69rem;font-weight:600;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08);}
+.hcard-arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.2);transition:all 220ms ease;}
+.hcard:hover .hcard-arrow{color:#77f3eb;transform:translateY(-50%) translateX(4px);}
 
 .scroll-hint{
   position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
@@ -471,37 +466,48 @@ section{padding:5.5rem 1.5rem;}
       <span data-en="Find the people you want to help, the problems worth solving, and the skills needed to create a meaningful future." data-id="Temukan orang-orang yang ingin kamu bantu, masalah yang layak diselesaikan, dan keterampilan yang dibutuhkan untuk menciptakan masa depan yang bermakna.">Find the people you want to help, the problems worth solving, and the skills needed to create a meaningful future.</span>
     </p>
 
-    <div class="pills">
-      <span class="pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><line x1="12" y1="2.5" x2="12" y2="8.5"/><line x1="12" y1="15.5" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="8.5" y2="12"/><line x1="15.5" y1="12" x2="21.5" y2="12"/></svg>
-        <span data-en="Discover Yourself" data-id="Kenali Dirimu">Discover Yourself</span>
-      </span>
-      <span class="pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span data-en="Explore Future Careers" data-id="Jelajahi Karier Masa Depan">Explore Future Careers</span>
-      </span>
-      <span class="pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <span data-en="Build Future-Proof Skills" data-id="Bangun Keterampilan Anti-Usang">Build Future-Proof Skills</span>
-      </span>
-      <span class="pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 7 9 3 15 7 21 3 21 17 15 21 9 17 3 21"/><line x1="9" y1="3" x2="9" y2="17"/><line x1="15" y1="7" x2="15" y2="21"/></svg>
-        <span data-en="Design Your Learning Journey" data-id="Rancang Perjalanan Belajarmu">Design Your Learning Journey</span>
-      </span>
-      <span class="pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6"/><path d="M15.5 7.5l3 3"/></svg>
-        <span data-en="Prepare for Admissions" data-id="Persiapkan Seleksi Masuk">Prepare for Admissions</span>
-      </span>
-    </div>
+    <div class="hero-cards">
 
-    <div class="hero-ctas">
-      <a href="/app/" class="btn-hero btn-hero-p">
-        <span data-en="Start Your Quest" data-id="Mulai Petualanganmu">Start Your Quest</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      <a href="/app/" class="hcard">
+        <div class="hcard-head">
+          <div class="hcard-icon teal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#77f3eb" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 4-9 9-9s9 4 9 9"/></svg>
+          </div>
+          <div>
+            <div class="hcard-label teal" data-en="Self-Discovery" data-id="Kenali Diri">Self-Discovery</div>
+            <div class="hcard-title" data-en="Discover Yourself" data-id="Kenali Dirimu">Kenali Dirimu</div>
+          </div>
+        </div>
+        <p class="hcard-desc" data-en="Answer 36 RIASEC questions, find your mission, and get a career map that fits your personality and values." data-id="Jawab 36 pertanyaan RIASEC, temukan misimu, dan dapatkan peta karier yang cocok dengan kepribadian dan nilai-nilaimu.">Jawab 36 pertanyaan RIASEC, temukan misimu, dan dapatkan peta karier yang cocok dengan kepribadian dan nilai-nilaimu.</p>
+        <div class="hcard-tags">
+          <span class="hcard-tag">RIASEC Assessment</span>
+          <span class="hcard-tag">Mission Builder</span>
+          <span class="hcard-tag">Career Match</span>
+          <span class="hcard-tag">± 8 menit</span>
+        </div>
+        <svg class="hcard-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
       </a>
-      <a href="#pillars" class="btn-hero btn-hero-s">
-        <span data-en="See How It Works" data-id="Lihat Cara Kerjanya">See How It Works</span>
+
+      <a href="/app/?mode=explore" class="hcard">
+        <div class="hcard-head">
+          <div class="hcard-icon indigo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <div class="hcard-label indigo" data-en="Career Intelligence" data-id="Intelijen Karier">Career Intelligence</div>
+            <div class="hcard-title" data-en="Explore Future Careers" data-id="Jelajahi Karier Masa Depan">Jelajahi Karier Masa Depan</div>
+          </div>
+        </div>
+        <p class="hcard-desc" data-en="See 30 careers in the AI era — automation impact, skills that stay safe, and 12-month adaptation strategies you can start now." data-id="Lihat 30 karier di era AI — dampak otomasi, skill yang tetap aman, dan strategi adaptasi 12 bulan yang bisa langsung kamu jalankan.">Lihat 30 karier di era AI — dampak otomasi, skill yang tetap aman, dan strategi adaptasi 12 bulan yang bisa langsung kamu jalankan.</p>
+        <div class="hcard-tags">
+          <span class="hcard-tag">AI Impact Analysis</span>
+          <span class="hcard-tag">Career MRI</span>
+          <span class="hcard-tag">Roadmap Adaptasi</span>
+          <span class="hcard-tag">30 karier</span>
+        </div>
+        <svg class="hcard-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
       </a>
+
     </div>
   </div>
 
