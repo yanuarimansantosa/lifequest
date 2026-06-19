@@ -198,6 +198,24 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
 .pathway-checklist li{display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:var(--text);line-height:1.55}
 .pathway-checklist li::before{content:'';display:inline-block;width:16px;height:16px;border-radius:4px;background:rgba(13,148,136,.15);border:1.5px solid #0d9488;flex-shrink:0;margin-top:1px}
 .pathway-divider{height:1px;background:var(--border);margin:12px 0}
+.kampus-section{margin-top:16px}
+.kampus-section-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:10px}
+.kampus-filter{display:flex;gap:6px;margin-bottom:10px}
+.kampus-filter-btn{padding:4px 12px;border-radius:10px;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;transition:var(--tr)}
+.kampus-filter-btn.on{background:var(--primary);border-color:var(--primary);color:#fff}
+.kampus-list{display:flex;flex-direction:column;gap:8px}
+.kampus-card{background:var(--bg-card2);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.kampus-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.kampus-nama{font-size:.84rem;font-weight:700;color:var(--text);line-height:1.3}
+.kampus-kota{font-size:.72rem;color:var(--muted)}
+.kampus-tipe-badge{font-size:.67rem;font-weight:700;padding:2px 8px;border-radius:8px;white-space:nowrap;flex-shrink:0}
+.kampus-tipe-badge.negeri{background:rgba(0,106,101,.12);color:#0d9488;border:1px solid rgba(0,106,101,.2)}
+.kampus-tipe-badge.swasta{background:rgba(99,102,241,.12);color:#6366f1;border:1px solid rgba(99,102,241,.2)}
+.kampus-prodi-list{display:flex;flex-wrap:wrap;gap:5px}
+.kampus-prodi-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:8px;font-size:.72rem;font-weight:500;background:var(--bg-card);border:1px solid var(--border);color:var(--muted)}
+.kampus-akr{font-size:.65rem;font-weight:700;padding:1px 5px;border-radius:4px}
+.kampus-akr.unggul{background:rgba(34,197,94,.12);color:#22c55e}
+.kampus-akr.baik-sekali{background:rgba(245,158,11,.12);color:#f59e0b}
 
 /* ── CAREER INTELLIGENCE ── */
 .ci-hero{text-align:center;padding:24px 0 20px}
@@ -1731,6 +1749,272 @@ const PATHWAY_DATA={
   'agri':{pathway:'degree',edu_path:{formal:'SMA IPA → S1 Agribisnis / Teknik Pertanian / Agroteknologi (4 thn)',alt:'S1 Teknik Informatika + spesialisasi agri-IoT via S2 atau magang startup AgroTech',min_years:4,license:null,sma_prep:['Pelajari biologi tanaman dan ilmu tanah dasar','Coba proyek sederhana: tanam sayur dengan sensor suhu/kelembaban','Ikut komunitas pertanian urban atau program agri-science di sekolah']}},
 };
 
+// ── KAMPUS DB ──
+const KAMPUS_DB=[
+  // ── NEGERI ──
+  {id:'ui',nama:'Universitas Indonesia',kota:'Depok',provinsi:'Jawa Barat',tipe:'negeri',rank:1,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Unggul',careers:['perawat']},
+    {nama:'Farmasi',akreditasi:'Unggul',careers:['apoteker']},
+    {nama:'Psikologi',akreditasi:'Unggul',careers:['psikolog']},
+    {nama:'Ilmu Komputer',akreditasi:'Unggul',careers:['software-eng','ai-eng','data-sci','cybersec']},
+    {nama:'Teknik Elektro',akreditasi:'Unggul',careers:['elektro','biomedis']},
+    {nama:'Ilmu Gizi',akreditasi:'Unggul',careers:['ahli-gizi']},
+    {nama:'Kesehatan Masyarakat',akreditasi:'Unggul',careers:['kesmas']},
+    {nama:'Hukum',akreditasi:'Unggul',careers:['pengacara','diplomat']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Unggul',careers:['jurnalis','content','penulis']},
+    {nama:'Kriminologi',akreditasi:'Unggul',careers:['investigator','forensik']},
+    {nama:'Kesejahteraan Sosial',akreditasi:'Unggul',careers:['social','ngo-worker']},
+    {nama:'Ilmu Perpustakaan',akreditasi:'Unggul',careers:['pustakawan']},
+    {nama:'Ekonomi',akreditasi:'Unggul',careers:['akuntan','konsultan']},
+  ]},
+  {id:'itb',nama:'Institut Teknologi Bandung',kota:'Bandung',provinsi:'Jawa Barat',tipe:'negeri',rank:2,prodi:[
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','ai-eng','data-sci','cybersec','cloud-eng']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Teknik Mesin',akreditasi:'Unggul',careers:['mesin']},
+    {nama:'Teknik Elektro',akreditasi:'Unggul',careers:['elektro']},
+    {nama:'Teknik Industri',akreditasi:'Unggul',careers:['industri']},
+    {nama:'Desain Komunikasi Visual',akreditasi:'Unggul',careers:['ux','animator','ilustrator']},
+    {nama:'Desain Interior',akreditasi:'Unggul',careers:['interior']},
+    {nama:'Arsitektur',akreditasi:'Unggul',careers:['arsitek']},
+    {nama:'Fisika',akreditasi:'Unggul',careers:['fisikawan']},
+    {nama:'Teknik Geologi',akreditasi:'Unggul',careers:['geologi']},
+    {nama:'Teknik Lingkungan',akreditasi:'Unggul',careers:['env']},
+    {nama:'Teknik Biomedis',akreditasi:'Unggul',careers:['biomedis']},
+  ]},
+  {id:'ugm',nama:'Universitas Gadjah Mada',kota:'Yogyakarta',provinsi:'DI Yogyakarta',tipe:'negeri',rank:3,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter','dokter-sp']},
+    {nama:'Kedokteran Hewan',akreditasi:'Unggul',careers:['drh']},
+    {nama:'Ilmu Gizi',akreditasi:'Unggul',careers:['ahli-gizi']},
+    {nama:'Psikologi',akreditasi:'Unggul',careers:['psikolog']},
+    {nama:'Ilmu Komputer',akreditasi:'Unggul',careers:['software-eng','ai-eng','data-sci']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Teknik Geologi',akreditasi:'Unggul',careers:['geologi']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Unggul',careers:['jurnalis']},
+    {nama:'Hukum',akreditasi:'Unggul',careers:['pengacara','diplomat']},
+    {nama:'Hubungan Internasional',akreditasi:'Unggul',careers:['diplomat','policy-analyst']},
+    {nama:'Sastra Indonesia',akreditasi:'Unggul',careers:['penulis','jurnalis']},
+    {nama:'Manajemen Olahraga',akreditasi:'Baik Sekali',careers:['sport-manager','pelatih']},
+    {nama:'Kesejahteraan Sosial',akreditasi:'Unggul',careers:['social','ngo-worker']},
+    {nama:'Ilmu Perpustakaan',akreditasi:'Unggul',careers:['pustakawan']},
+    {nama:'Manajemen',akreditasi:'Unggul',careers:['entrepreneur','pm','konsultan']},
+  ]},
+  {id:'ipb',nama:'IPB University',kota:'Bogor',provinsi:'Jawa Barat',tipe:'negeri',rank:4,prodi:[
+    {nama:'Agribisnis',akreditasi:'Unggul',careers:['agri','entrepreneur']},
+    {nama:'Agroteknologi',akreditasi:'Unggul',careers:['agri']},
+    {nama:'Ilmu Gizi',akreditasi:'Unggul',careers:['ahli-gizi']},
+    {nama:'Kedokteran Hewan',akreditasi:'Unggul',careers:['drh']},
+    {nama:'Ilmu Komputer',akreditasi:'Unggul',careers:['software-eng','data-sci']},
+    {nama:'Statistika',akreditasi:'Unggul',careers:['data-sci','peneliti']},
+    {nama:'Teknik Sipil',akreditasi:'Baik Sekali',careers:['sipil']},
+  ]},
+  {id:'unair',nama:'Universitas Airlangga',kota:'Surabaya',provinsi:'Jawa Timur',tipe:'negeri',rank:5,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter','dokter-sp']},
+    {nama:'Farmasi',akreditasi:'Unggul',careers:['apoteker']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Unggul',careers:['perawat']},
+    {nama:'Psikologi',akreditasi:'Unggul',careers:['psikolog']},
+    {nama:'Kesehatan Masyarakat',akreditasi:'Unggul',careers:['kesmas']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Unggul',careers:['jurnalis','content']},
+    {nama:'Manajemen',akreditasi:'Unggul',careers:['entrepreneur','konsultan']},
+    {nama:'Akuntansi',akreditasi:'Unggul',careers:['akuntan']},
+  ]},
+  {id:'its',nama:'Institut Teknologi Sepuluh Nopember',kota:'Surabaya',provinsi:'Jawa Timur',tipe:'negeri',rank:6,prodi:[
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','ai-eng','cybersec','cloud-eng']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Teknik Mesin',akreditasi:'Unggul',careers:['mesin']},
+    {nama:'Teknik Elektro',akreditasi:'Unggul',careers:['elektro']},
+    {nama:'Teknik Industri',akreditasi:'Unggul',careers:['industri']},
+    {nama:'Desain Produk Industri',akreditasi:'Unggul',careers:['ux','game']},
+    {nama:'Teknik Lingkungan',akreditasi:'Unggul',careers:['env']},
+  ]},
+  {id:'undip',nama:'Universitas Diponegoro',kota:'Semarang',provinsi:'Jawa Tengah',tipe:'negeri',rank:7,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter','dokter-sp']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Teknik Elektro',akreditasi:'Unggul',careers:['elektro']},
+    {nama:'Teknik Industri',akreditasi:'Unggul',careers:['industri']},
+    {nama:'Ilmu Komputer',akreditasi:'Unggul',careers:['software-eng','data-sci']},
+    {nama:'Hukum',akreditasi:'Unggul',careers:['pengacara']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Baik Sekali',careers:['jurnalis']},
+  ]},
+  {id:'unpad',nama:'Universitas Padjadjaran',kota:'Bandung',provinsi:'Jawa Barat',tipe:'negeri',rank:8,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter','dokter-sp']},
+    {nama:'Farmasi',akreditasi:'Unggul',careers:['apoteker']},
+    {nama:'Psikologi',akreditasi:'Unggul',careers:['psikolog']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Unggul',careers:['jurnalis','content']},
+    {nama:'Hubungan Internasional',akreditasi:'Unggul',careers:['diplomat']},
+    {nama:'Akuntansi',akreditasi:'Unggul',careers:['akuntan']},
+    {nama:'Ilmu Gizi',akreditasi:'Baik Sekali',careers:['ahli-gizi']},
+  ]},
+  {id:'ub',nama:'Universitas Brawijaya',kota:'Malang',provinsi:'Jawa Timur',tipe:'negeri',rank:9,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter']},
+    {nama:'Kedokteran Hewan',akreditasi:'Unggul',careers:['drh']},
+    {nama:'Ilmu Gizi',akreditasi:'Unggul',careers:['ahli-gizi']},
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','ai-eng']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',careers:['perawat']},
+    {nama:'Manajemen',akreditasi:'Unggul',careers:['entrepreneur','pm']},
+  ]},
+  {id:'usu',nama:'Universitas Sumatera Utara',kota:'Medan',provinsi:'Sumatera Utara',tipe:'negeri',rank:10,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter']},
+    {nama:'Farmasi',akreditasi:'Unggul',careers:['apoteker']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Teknik Elektro',akreditasi:'Baik Sekali',careers:['elektro']},
+    {nama:'Ilmu Komputer',akreditasi:'Baik Sekali',careers:['software-eng']},
+    {nama:'Hukum',akreditasi:'Unggul',careers:['pengacara']},
+  ]},
+  {id:'unhas',nama:'Universitas Hasanuddin',kota:'Makassar',provinsi:'Sulawesi Selatan',tipe:'negeri',rank:11,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Teknik Geologi',akreditasi:'Unggul',careers:['geologi']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',careers:['perawat']},
+    {nama:'Teknik Elektro',akreditasi:'Baik Sekali',careers:['elektro']},
+    {nama:'Hukum',akreditasi:'Unggul',careers:['pengacara']},
+  ]},
+  {id:'upi',nama:'Universitas Pendidikan Indonesia',kota:'Bandung',provinsi:'Jawa Barat',tipe:'negeri',rank:12,prodi:[
+    {nama:'Pendidikan Biologi',akreditasi:'Unggul',careers:['guru']},
+    {nama:'Pendidikan Matematika',akreditasi:'Unggul',careers:['guru']},
+    {nama:'Pendidikan Bahasa Inggris',akreditasi:'Unggul',careers:['guru']},
+    {nama:'Bimbingan dan Konseling',akreditasi:'Unggul',careers:['konselor']},
+    {nama:'Teknologi Pendidikan',akreditasi:'Unggul',careers:['kurikulum','instruktur']},
+    {nama:'Ilmu Keolahragaan',akreditasi:'Unggul',careers:['pelatih','sport-scientist']},
+  ]},
+  {id:'uny',nama:'Universitas Negeri Yogyakarta',kota:'Yogyakarta',provinsi:'DI Yogyakarta',tipe:'negeri',rank:13,prodi:[
+    {nama:'Pendidikan IPA',akreditasi:'Unggul',careers:['guru']},
+    {nama:'Pendidikan Seni Rupa',akreditasi:'Unggul',careers:['guru','ilustrator']},
+    {nama:'Bimbingan dan Konseling',akreditasi:'Unggul',careers:['konselor']},
+    {nama:'Ilmu Keolahragaan',akreditasi:'Unggul',careers:['pelatih','atlet','sport-scientist']},
+    {nama:'Pendidikan Teknik Informatika',akreditasi:'Baik Sekali',careers:['guru','software-eng']},
+    {nama:'Manajemen Olahraga',akreditasi:'Unggul',careers:['sport-manager','pelatih']},
+  ]},
+  {id:'unj',nama:'Universitas Negeri Jakarta',kota:'Jakarta',provinsi:'DKI Jakarta',tipe:'negeri',rank:14,prodi:[
+    {nama:'Pendidikan Matematika',akreditasi:'Unggul',careers:['guru']},
+    {nama:'Bimbingan dan Konseling',akreditasi:'Unggul',careers:['konselor']},
+    {nama:'Ilmu Keolahragaan',akreditasi:'Unggul',careers:['pelatih','atlet']},
+    {nama:'Pendidikan Ekonomi',akreditasi:'Baik Sekali',careers:['guru','akuntan']},
+    {nama:'Desain Komunikasi Visual',akreditasi:'Baik Sekali',careers:['ux','ilustrator']},
+  ]},
+  {id:'telkomuniv',nama:'Telkom University',kota:'Bandung',provinsi:'Jawa Barat',tipe:'negeri',rank:15,prodi:[
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','ai-eng','cybersec','cloud-eng']},
+    {nama:'Sistem Informasi',akreditasi:'Unggul',careers:['data-sci','pm']},
+    {nama:'Desain Komunikasi Visual',akreditasi:'Unggul',careers:['ux','animator']},
+    {nama:'Teknik Elektro',akreditasi:'Unggul',careers:['elektro']},
+    {nama:'Manajemen Bisnis Telekomunikasi',akreditasi:'Baik Sekali',careers:['entrepreneur','pm']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Baik Sekali',careers:['content','jurnalis','penulis','podcaster']},
+    {nama:'Sastra Indonesia',akreditasi:'Baik Sekali',careers:['penulis']},
+  ]},
+  // ── SWASTA ──
+  {id:'binus',nama:'Bina Nusantara University',kota:'Jakarta',provinsi:'DKI Jakarta',tipe:'swasta',rank:1,prodi:[
+    {nama:'Computer Science',akreditasi:'Unggul',careers:['software-eng','ai-eng','cybersec','game']},
+    {nama:'Information Systems',akreditasi:'Unggul',careers:['data-sci','pm','cloud-eng']},
+    {nama:'Visual Communication Design',akreditasi:'Unggul',careers:['ux','animator','ilustrator']},
+    {nama:'Business Management',akreditasi:'Unggul',careers:['entrepreneur','pm','konsultan']},
+    {nama:'Film',akreditasi:'Baik Sekali',careers:['content','animator']},
+    {nama:'Interior Design',akreditasi:'Baik Sekali',careers:['interior']},
+  ]},
+  {id:'prasmul',nama:'Prasetiya Mulya University',kota:'Tangerang Selatan',provinsi:'Banten',tipe:'swasta',rank:2,prodi:[
+    {nama:'Business',akreditasi:'Unggul',careers:['entrepreneur','pm','konsultan']},
+    {nama:'Food Technology',akreditasi:'Unggul',careers:['ahli-gizi','agri']},
+    {nama:'Computer Science',akreditasi:'Baik Sekali',careers:['software-eng','data-sci']},
+    {nama:'Visual Communication Design',akreditasi:'Baik Sekali',careers:['ux']},
+  ]},
+  {id:'uii',nama:'Universitas Islam Indonesia',kota:'Yogyakarta',provinsi:'DI Yogyakarta',tipe:'swasta',rank:3,prodi:[
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','ai-eng']},
+    {nama:'Hukum',akreditasi:'Unggul',careers:['pengacara','diplomat']},
+    {nama:'Psikologi',akreditasi:'Unggul',careers:['psikolog','konselor']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Ekonomi',akreditasi:'Unggul',careers:['akuntan','konsultan']},
+    {nama:'Kedokteran',akreditasi:'Baik Sekali',careers:['dokter']},
+  ]},
+  {id:'petra',nama:'Universitas Kristen Petra',kota:'Surabaya',provinsi:'Jawa Timur',tipe:'swasta',rank:4,prodi:[
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','cybersec']},
+    {nama:'Desain Komunikasi Visual',akreditasi:'Unggul',careers:['ux','animator','fotografer']},
+    {nama:'Arsitektur',akreditasi:'Unggul',careers:['arsitek']},
+    {nama:'Desain Interior',akreditasi:'Unggul',careers:['interior']},
+    {nama:'Teknik Sipil',akreditasi:'Baik Sekali',careers:['sipil']},
+    {nama:'Manajemen Bisnis',akreditasi:'Baik Sekali',careers:['entrepreneur']},
+  ]},
+  {id:'atmajaya',nama:'Universitas Atma Jaya Yogyakarta',kota:'Yogyakarta',provinsi:'DI Yogyakarta',tipe:'swasta',rank:5,prodi:[
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','game']},
+    {nama:'Arsitektur',akreditasi:'Unggul',careers:['arsitek']},
+    {nama:'Hukum',akreditasi:'Unggul',careers:['pengacara']},
+    {nama:'Psikologi',akreditasi:'Baik Sekali',careers:['psikolog']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Baik Sekali',careers:['jurnalis','content']},
+  ]},
+  {id:'president',nama:'President University',kota:'Cikarang',provinsi:'Jawa Barat',tipe:'swasta',rank:6,prodi:[
+    {nama:'Computer Science',akreditasi:'Unggul',careers:['software-eng','cybersec','cloud-eng']},
+    {nama:'Industrial Engineering',akreditasi:'Unggul',careers:['industri']},
+    {nama:'Business Administration',akreditasi:'Unggul',careers:['entrepreneur','pm']},
+    {nama:'Information Systems',akreditasi:'Baik Sekali',careers:['data-sci','pm']},
+    {nama:'Visual Communication Design',akreditasi:'Baik Sekali',careers:['ux']},
+  ]},
+  {id:'trisakti',nama:'Universitas Trisakti',kota:'Jakarta',provinsi:'DKI Jakarta',tipe:'swasta',rank:7,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter']},
+    {nama:'Arsitektur',akreditasi:'Unggul',careers:['arsitek']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Teknik Industri',akreditasi:'Baik Sekali',careers:['industri']},
+    {nama:'Desain Mode',akreditasi:'Unggul',careers:['fashion']},
+    {nama:'Desain Interior',akreditasi:'Baik Sekali',careers:['interior']},
+    {nama:'Hukum',akreditasi:'Baik Sekali',careers:['pengacara']},
+  ]},
+  {id:'unika',nama:'Universitas Katolik Soegijapranata',kota:'Semarang',provinsi:'Jawa Tengah',tipe:'swasta',rank:8,prodi:[
+    {nama:'Psikologi',akreditasi:'Unggul',careers:['psikolog','konselor']},
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng']},
+    {nama:'Desain Komunikasi Visual',akreditasi:'Unggul',careers:['ux','ilustrator']},
+    {nama:'Arsitektur',akreditasi:'Baik Sekali',careers:['arsitek']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Baik Sekali',careers:['jurnalis']},
+  ]},
+  {id:'ubaya',nama:'Universitas Surabaya',kota:'Surabaya',provinsi:'Jawa Timur',tipe:'swasta',rank:9,prodi:[
+    {nama:'Psikologi',akreditasi:'Unggul',careers:['psikolog']},
+    {nama:'Farmasi',akreditasi:'Unggul',careers:['apoteker']},
+    {nama:'Teknik Informatika',akreditasi:'Baik Sekali',careers:['software-eng']},
+    {nama:'Manajemen',akreditasi:'Baik Sekali',careers:['entrepreneur','konsultan']},
+    {nama:'Desain Industri',akreditasi:'Baik Sekali',careers:['ux']},
+  ]},
+  {id:'unpas',nama:'Universitas Pasundan',kota:'Bandung',provinsi:'Jawa Barat',tipe:'swasta',rank:10,prodi:[
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','cybersec']},
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Baik Sekali',careers:['jurnalis','content']},
+    {nama:'Hukum',akreditasi:'Baik Sekali',careers:['pengacara']},
+    {nama:'Desain Komunikasi Visual',akreditasi:'Baik Sekali',careers:['ux','ilustrator']},
+  ]},
+  {id:'umy',nama:'Universitas Muhammadiyah Yogyakarta',kota:'Yogyakarta',provinsi:'DI Yogyakarta',tipe:'swasta',rank:11,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',careers:['dokter']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Unggul',careers:['perawat']},
+    {nama:'Hubungan Internasional',akreditasi:'Unggul',careers:['diplomat','policy-analyst']},
+    {nama:'Teknik Informatika',akreditasi:'Baik Sekali',careers:['software-eng']},
+    {nama:'Hukum',akreditasi:'Baik Sekali',careers:['pengacara']},
+  ]},
+  {id:'stikom',nama:'Institut Bisnis dan Informatika Stikom',kota:'Surabaya',provinsi:'Jawa Timur',tipe:'swasta',rank:12,prodi:[
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','cybersec']},
+    {nama:'Desain Komunikasi Visual',akreditasi:'Unggul',careers:['ux','animator','ilustrator']},
+    {nama:'Sistem Informasi',akreditasi:'Baik Sekali',careers:['data-sci','pm']},
+    {nama:'Desain Grafis',akreditasi:'Baik Sekali',careers:['ux','fotografer']},
+  ]},
+  {id:'mercubuana',nama:'Universitas Mercu Buana',kota:'Jakarta',provinsi:'DKI Jakarta',tipe:'swasta',rank:13,prodi:[
+    {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng']},
+    {nama:'Desain Komunikasi Visual',akreditasi:'Unggul',careers:['ux','animator']},
+    {nama:'Ilmu Komunikasi',akreditasi:'Unggul',careers:['jurnalis','content','podcaster']},
+    {nama:'Teknik Sipil',akreditasi:'Baik Sekali',careers:['sipil']},
+    {nama:'Arsitektur',akreditasi:'Baik Sekali',careers:['arsitek']},
+  ]},
+  {id:'esaunggul',nama:'Universitas Esa Unggul',kota:'Jakarta',provinsi:'DKI Jakarta',tipe:'swasta',rank:14,prodi:[
+    {nama:'Fisioterapi',akreditasi:'Unggul',careers:['fisioterapis']},
+    {nama:'Gizi',akreditasi:'Unggul',careers:['ahli-gizi']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',careers:['perawat']},
+    {nama:'Teknik Informatika',akreditasi:'Baik Sekali',careers:['software-eng']},
+    {nama:'Desain Komunikasi Visual',akreditasi:'Baik Sekali',careers:['ux']},
+  ]},
+  {id:'itenas',nama:'Institut Teknologi Nasional Bandung',kota:'Bandung',provinsi:'Jawa Barat',tipe:'swasta',rank:15,prodi:[
+    {nama:'Teknik Sipil',akreditasi:'Unggul',careers:['sipil']},
+    {nama:'Teknik Mesin',akreditasi:'Unggul',careers:['mesin']},
+    {nama:'Teknik Elektro',akreditasi:'Baik Sekali',careers:['elektro']},
+    {nama:'Teknik Industri',akreditasi:'Baik Sekali',careers:['industri']},
+    {nama:'Arsitektur',akreditasi:'Baik Sekali',careers:['arsitek']},
+    {nama:'Desain Interior',akreditasi:'Baik Sekali',careers:['interior']},
+    {nama:'Desain Mode',akreditasi:'Baik Sekali',careers:['fashion']},
+  ]},
+];
+
 // ── PATHWAY UI ──
 const PATHWAY_LABELS={free:'Mulai Sekarang',flex:'Jalur Fleksibel',degree:'Gelar Diperlukan',licensed:'Profesi Berlisensi'};
 const PATHWAY_DESC={free:'Bisa dimulai hari ini tanpa biaya pendidikan formal',flex:'Gelar membantu tapi bukan satu-satunya jalan',degree:'Gelar sarjana adalah persyaratan minimum',licensed:'Wajib lisensi/izin resmi untuk praktik'};
@@ -1765,6 +2049,48 @@ function renderPathway(careerId){
     </div>
     <div class="pathway-row-label">Checklist untuk Kamu (dari SMA sekarang)</div>
     <ul class="pathway-checklist">${(e.sma_prep||[]).map(s=>`<li>${s}</li>`).join('')}</ul>
+    <div id="kampus-section-${careerId}"></div>
+  `;
+  renderKampus(careerId,'all');
+}
+
+function renderKampus(careerId,filter){
+  const sec=document.getElementById('kampus-section-'+careerId);
+  if(!sec)return;
+  const matches=KAMPUS_DB.map(k=>{
+    const relevantProdi=k.prodi.filter(p=>p.careers.includes(careerId));
+    return relevantProdi.length?{...k,prodi:relevantProdi}:null;
+  }).filter(Boolean);
+  const filtered=filter==='all'?matches:matches.filter(k=>k.tipe===filter);
+  if(!matches.length){sec.innerHTML='';return;}
+  sec.innerHTML=`
+    <div class="kampus-section">
+      <div class="pathway-divider"></div>
+      <div class="kampus-section-title">Pilihan Kampus</div>
+      <div class="kampus-filter">
+        <button class="kampus-filter-btn${filter==='all'?' on':''}" onclick="renderKampus('${careerId}','all')">Semua</button>
+        <button class="kampus-filter-btn${filter==='negeri'?' on':''}" onclick="renderKampus('${careerId}','negeri')">Negeri</button>
+        <button class="kampus-filter-btn${filter==='swasta'?' on':''}" onclick="renderKampus('${careerId}','swasta')">Swasta</button>
+      </div>
+      <div class="kampus-list">${filtered.map(k=>`
+        <div class="kampus-card">
+          <div class="kampus-card-head">
+            <div>
+              <div class="kampus-nama">${k.nama}</div>
+              <div class="kampus-kota">${k.kota}, ${k.provinsi}</div>
+            </div>
+            <span class="kampus-tipe-badge ${k.tipe}">${k.tipe==='negeri'?'Negeri':'Swasta'}</span>
+          </div>
+          <div class="kampus-prodi-list">${k.prodi.map(p=>`
+            <span class="kampus-prodi-chip">
+              ${p.nama}
+              <span class="kampus-akr ${p.akreditasi==='Unggul'?'unggul':'baik-sekali'}">${p.akreditasi==='Unggul'?'Unggul':'Baik Sekali'}</span>
+            </span>`).join('')}
+          </div>
+        </div>`).join('')}
+      </div>
+      ${filtered.length<matches.length?`<p style="font-size:.72rem;color:var(--muted);margin-top:8px;text-align:center">${matches.length-filtered.length} kampus lainnya tersedia di filter lain</p>`:''}
+    </div>
   `;
 }
 
