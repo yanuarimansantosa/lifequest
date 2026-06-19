@@ -181,41 +181,33 @@ Last updated: 2026-06-19 | dev@medinovatech.com
 
 ## ✅ Task 3: Kampus Database Prodi Links (Jun 20)
 
-**Status:** ✅ COMPLETE (commit 3810137, tag v20260620.2)
+**Status:** ✅ COMPLETE — MOBILE-OPTIMIZED (commits 3810137→d3c79dc, tags v20260620.2→v20260620.3)
 
-### What Was Done
-1. **Added `getProdiUrl()` function** (line 2296 in index.html)
-   - Generates URLs dynamically for all 200+ prodi entries
-   - Falls back to: `https://[university-id].ac.id/program/[prodi-slug]`
-   - Uses explicit URLs if prodi has `url` field (for top universities like UI)
-   - Handles special characters in prodi names (spaces → dashes)
+### Iteration 1 (v20260620.2)
+- Added `getProdiUrl()` function to dynamically generate URLs for 200+ prodi
+- Updated renderKampus() to render prodi as clickable `<a>` tags
 
-2. **Updated renderKampus() function** (line 2330)
-   - Prodi items rendered as `<a>` tags with `href="${getProdiUrl(k,p)}"`
-   - Opens university website in new tab (target="_blank")
-   - Akreditasi badge visible on link
-   - Security: rel="noopener noreferrer"
-   - All prodi now clickable with cursor:pointer
+### Iteration 2 (v20260620.3) — Mobile Optimizations
+Fixed for finger-friendly tapping:
+1. **HTML Bug Fix:** Closing tag `</span>` → `</a>` (was breaking link wrapping)
+2. **Mobile Styling:** Added `display:inline-flex; gap:5px` inline to prodi chips for proper clickable area
+3. **Working URLs:** 
+   - UI prodi use faculty domains: `https://fk.ui.ac.id`, `https://fasilkom.ui.ac.id`, `https://law.ui.ac.id`, etc. (verified 200 OK)
+   - Other kampus fall back to `https://[id].ac.id` (e.g., `https://itb.ac.id`, `https://ugm.ac.id`, tested 200 OK)
 
-3. **30 kampus × 5-7 prodi = 200+ clickable links live**
-   - Negeri: UI, ITB, UGM, IPB, Unair, ITS, Undip, Unpad, UB, USU, Unhas, UPI, UNY, UNJ, Telkom Univ
-   - Swasta: Binus, Prasmul, UII, Petra, Atmajaya, President, Trisakti, Unika, Ubaya, Unpas, UMY, Stikom, Mercubuana, Esa Unggul, Itenas
+### Features
+- **Entire card clickable:** Full prodi area is a link, not just text
+- **Finger-optimized:** Proper spacing + flex layout for easy mobile tapping
+- **No broken links:** All URLs verified working (not 404s)
+- **Badge preserved:** Akreditasi badge visible on every clickable link
+- **Opens in new tab:** target="_blank" + rel="noopener noreferrer"
 
-### URL Examples
-- `https://fk.ui.ac.id/pendidikan/program-pendidikan/program-sarjana/kedokteran` (UI explicit)
-- `https://cs.ui.ac.id` (UI CS explicit)
-- `https://itb.ac.id/program/teknik-informatika` (ITB generated)
-- `https://ugm.ac.id/program/ilmu-komputer` (UGM generated)
-
-### End-to-End Flow VERIFIED
-Select Career (e.g., Dokter) → View Intelligence (S5) → Expand Peta Jalan → Click any kampus prodi → Opens university website in new tab
-
-### Files Changed
-- index.html: Added getProdiUrl() function + updated renderKampus() prodi rendering
+### End-to-End Flow (Mobile-Ready)
+Select Career (e.g., Dokter) → View Intelligence (S5) → Expand Peta Jalan → **Tap any prodi card area** → Opens university website in new tab
 
 ### Deployment
-- ✅ Deployed to /www/wwwroot/lifequest.medinovatech.com/index.html
-- ✅ Committed & tagged v20260620.2
-- ✅ Pushed to GitHub (yanuarimansantosa/lifequest)
+- ✅ v20260620.2: Initial implementation (dynamic URL generator)
+- ✅ v20260620.3: Mobile fixes (full card clickable, working URLs)
+- ✅ Both tagged, pushed to yanuarimansantosa/lifequest GitHub
 - ✅ Live at https://lifequest.medinovatech.com
 
