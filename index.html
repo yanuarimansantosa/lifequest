@@ -1991,20 +1991,20 @@ const PATHWAY_DATA={
 const KAMPUS_DB=[
   // ── NEGERI ──
   {id:'ui',nama:'Universitas Indonesia',kota:'Depok',provinsi:'Jawa Barat',tipe:'negeri',rank:1,prodi:[
-    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.ui.ac.id/pendidikan/program-pendidikan/program-sarjana/kedokteran',careers:['dokter','dokter-sp']},
-    {nama:'Ilmu Keperawatan',akreditasi:'Unggul',url:'https://fk.ui.ac.id/pendidikan/program-pendidikan/program-sarjana/ilmu-keperawatan',careers:['perawat']},
-    {nama:'Farmasi',akreditasi:'Unggul',url:'https://farmasi.ui.ac.id',careers:['apoteker']},
-    {nama:'Psikologi',akreditasi:'Unggul',url:'https://psychology.ui.ac.id',careers:['psikolog']},
-    {nama:'Ilmu Komputer',akreditasi:'Unggul',url:'https://cs.ui.ac.id',careers:['software-eng','ai-eng','data-sci','cybersec']},
-    {nama:'Teknik Elektro',akreditasi:'Unggul',url:'https://ee.ui.ac.id',careers:['elektro','biomedis']},
-    {nama:'Ilmu Gizi',akreditasi:'Unggul',url:'https://gizi.ui.ac.id',careers:['ahli-gizi']},
-    {nama:'Kesehatan Masyarakat',akreditasi:'Unggul',url:'https://fk.ui.ac.id/ilmu-kesehatan-masyarakat',careers:['kesmas']},
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.ui.ac.id',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Unggul',url:'https://fk.ui.ac.id',careers:['perawat']},
+    {nama:'Farmasi',akreditasi:'Unggul',url:'https://fk.ui.ac.id',careers:['apoteker']},
+    {nama:'Psikologi',akreditasi:'Unggul',url:'https://fk.ui.ac.id',careers:['psikolog']},
+    {nama:'Ilmu Komputer',akreditasi:'Unggul',url:'https://fasilkom.ui.ac.id',careers:['software-eng','ai-eng','data-sci','cybersec']},
+    {nama:'Teknik Elektro',akreditasi:'Unggul',url:'https://elektro.ui.ac.id',careers:['elektro','biomedis']},
+    {nama:'Ilmu Gizi',akreditasi:'Unggul',url:'https://fk.ui.ac.id',careers:['ahli-gizi']},
+    {nama:'Kesehatan Masyarakat',akreditasi:'Unggul',url:'https://fk.ui.ac.id',careers:['kesmas']},
     {nama:'Hukum',akreditasi:'Unggul',url:'https://law.ui.ac.id',careers:['pengacara','diplomat']},
     {nama:'Ilmu Komunikasi',akreditasi:'Unggul',url:'https://ilkom.ui.ac.id',careers:['jurnalis','content','penulis']},
-    {nama:'Kriminologi',akreditasi:'Unggul',url:'https://criminology.ui.ac.id',careers:['investigator','forensik']},
-    {nama:'Kesejahteraan Sosial',akreditasi:'Unggul',url:'https://fk.ui.ac.id/kesejahteraan-sosial',careers:['social','ngo-worker']},
-    {nama:'Ilmu Perpustakaan',akreditasi:'Unggul',careers:['pustakawan']},
-    {nama:'Ekonomi',akreditasi:'Unggul',careers:['akuntan','konsultan']},
+    {nama:'Kriminologi',akreditasi:'Unggul',url:'https://law.ui.ac.id',careers:['investigator','forensik']},
+    {nama:'Kesejahteraan Sosial',akreditasi:'Unggul',url:'https://fk.ui.ac.id',careers:['social','ngo-worker']},
+    {nama:'Ilmu Perpustakaan',akreditasi:'Unggul',url:'https://lib.ui.ac.id',careers:['pustakawan']},
+    {nama:'Ekonomi',akreditasi:'Unggul',url:'https://fk.ui.ac.id',careers:['akuntan','konsultan']},
   ]},
   {id:'itb',nama:'Institut Teknologi Bandung',kota:'Bandung',provinsi:'Jawa Barat',tipe:'negeri',rank:2,prodi:[
     {nama:'Teknik Informatika',akreditasi:'Unggul',careers:['software-eng','ai-eng','data-sci','cybersec','cloud-eng']},
@@ -2295,9 +2295,7 @@ function renderPathway(careerId){
 
 function getProdiUrl(univ,prodi){
   if(prodi.url)return prodi.url;
-  const base=univ.id?`https://${univ.id}.ac.id`:'#';
-  const slug=prodi.nama.toLowerCase().replace(/\s+/g,'-').replace(/[^\w-]/g,'');
-  return `${base}/program/${slug}`;
+  return `https://${univ.id||'univ'}.ac.id`;
 }
 function renderKampus(careerId,filter){
   const sec=document.getElementById('kampus-section-'+careerId);
@@ -2327,10 +2325,10 @@ function renderKampus(careerId,filter){
             <span class="kampus-tipe-badge ${k.tipe}">${k.tipe==='negeri'?'Negeri':'Swasta'}</span>
           </div>
           <div class="kampus-prodi-list">${k.prodi.map(p=>`
-            <a href="${getProdiUrl(k,p)}" target="_blank" rel="noopener noreferrer" class="kampus-prodi-chip" style="text-decoration:none;color:inherit;cursor:pointer">
+            <a href="${getProdiUrl(k,p)}" target="_blank" rel="noopener noreferrer" class="kampus-prodi-chip" style="text-decoration:none;color:inherit;cursor:pointer;display:inline-flex;gap:5px">
               ${p.nama}
               <span class="kampus-akr ${p.akreditasi==='Unggul'?'unggul':'baik-sekali'}">${p.akreditasi==='Unggul'?'Unggul':'Baik Sekali'}</span>
-            </span>`).join('')}
+            </a>`).join('')}
           </div>
         </div>`).join('')}
       </div>
