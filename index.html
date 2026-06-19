@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LifeQuest — Discover Your Purpose. Build Your Impact.</title>
+<meta name="description" content="Find the people you want to help, the problems worth solving, and the skills needed to create a meaningful future."/>
+<meta property="og:title" content="LifeQuest by Medinovatech"/>
+<meta property="og:description" content="Discover Your Purpose. Build Your Impact."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ============================
+   CSS CUSTOM PROPERTIES
+============================ */
+:root {
+  --bg:           #f0f4f8;
+  --bg-nav:       rgba(240,244,248,0.92);
+  --bg-card:      #ffffff;
+  --bg-card-h:    #f8fafc;
+  --text:         #0a0e1a;
+  --text-muted:   #64748b;
+  --text-subtle:  #94a3b8;
+  --border:       #e2e8f0;
+  --border-sub:   #f1f5f9;
+  --primary:      #006a65;
+  --primary-h:    #005652;
+  --primary-glow: rgba(0,106,101,0.12);
+  --accent:       #d4a847;
+  --teal:         #77f3eb;
+  --shadow-sm:    0 1px 3px rgba(0,0,0,.06);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.08);
+  --shadow-lg:    0 12px 32px rgba(0,0,0,.10);
+  --tr:           0.25s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:           #070c18;
+  --bg-nav:       rgba(7,12,24,0.92);
+  --bg-card:      #0f1629;
+  --bg-card-h:    #141d35;
+  --text:         #e8edf5;
+  --text-muted:   #8fa3c0;
+  --text-subtle:  #3d5068;
+  --border:       #1a2540;
+  --border-sub:   #0f1629;
+  --primary:      #006a65;
+  --primary-h:    #008f89;
+  --primary-glow: rgba(119,243,235,0.07);
+  --accent:       #d4a847;
+  --teal:         #77f3eb;
+  --shadow-sm:    0 1px 3px rgba(0,0,0,.35);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.45);
+  --shadow-lg:    0 12px 32px rgba(0,0,0,.55);
+}
+
+/* ============================
+   RESET
+============================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);transition:background var(--tr),color var(--tr);overflow-x:hidden;line-height:1.6;}
+h1,h2,h3,h4{font-family:'Figtree',sans-serif;font-weight:900;line-height:1.1;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+img{max-width:100%;display:block;}
+
+/* ============================
+   NAV
+============================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--bg-nav);
+  backdrop-filter:blur(18px) saturate(1.6);
+  -webkit-backdrop-filter:blur(18px) saturate(1.6);
+  border-bottom:1px solid var(--border);
+  transition:background var(--tr),box-shadow var(--tr);
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 1.5rem;
+  height:64px;display:flex;align-items:center;gap:1.5rem;
+}
+.logo{display:flex;flex-direction:column;gap:1px;flex-shrink:0;text-decoration:none;}
+.logo-name{
+  font-family:'Figtree',sans-serif;font-weight:900;font-size:1.2rem;
+  letter-spacing:-.03em;color:var(--primary);display:flex;align-items:center;gap:.35rem;
+}
+.logo-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;flex-shrink:0;}
+.logo-sub{font-size:.62rem;color:var(--text-subtle);letter-spacing:.08em;text-transform:uppercase;font-weight:600;}
+
+.nav-links{display:flex;align-items:center;gap:.1rem;flex:1;}
+.nav-link{font-size:.85rem;font-weight:500;color:var(--text-muted);padding:.38rem .7rem;border-radius:8px;transition:all var(--tr);}
+.nav-link:hover{color:var(--text);background:var(--border-sub);}
+
+.nav-actions{display:flex;align-items:center;gap:.5rem;flex-shrink:0;}
+
+.lang-sw{
+  display:flex;align-items:center;
+  background:var(--border-sub);border:1px solid var(--border);
+  border-radius:20px;padding:2px;
+}
+.lang-btn{
+  padding:.18rem .55rem;border-radius:16px;
+  font-size:.7rem;font-weight:700;letter-spacing:.04em;
+  color:var(--text-muted);transition:all var(--tr);
+}
+.lang-btn.on{background:var(--primary);color:#fff;}
+
+.theme-btn{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--border-sub);border:1px solid var(--border);
+  color:var(--text-muted);transition:all var(--tr);
+}
+.theme-btn:hover{color:var(--text);border-color:var(--primary);}
+
+.btn-nav{
+  padding:.48rem 1.15rem;background:var(--primary);color:#fff;
+  border-radius:24px;font-family:'Figtree',sans-serif;font-weight:700;
+  font-size:.82rem;letter-spacing:.01em;transition:all var(--tr);white-space:nowrap;
+  display:none;
+}
+.btn-nav:hover{background:var(--primary-h);transform:translateY(-1px);}
+@media(min-width:768px){.btn-nav{display:flex;align-items:center;}.nav-links{display:flex;}}
+@media(max-width:767px){.nav-links{display:none;}}
+
+.burger{
+  width:34px;height:34px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--border-sub);border:1px solid var(--border);
+  color:var(--text-muted);
+}
+@media(min-width:768px){.burger{display:none;}}
+
+.mob-menu{
+  display:none;position:fixed;top:64px;left:0;right:0;
+  background:var(--bg-nav);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  padding:.75rem 1.5rem 1rem;flex-direction:column;gap:.15rem;z-index:199;
+}
+.mob-menu.open{display:flex;}
+.mob-menu .nav-link{padding:.55rem .7rem;}
+
+/* ============================
+   HERO
+============================ */
+.hero{
+  min-height:100vh;background:#000926;
+  position:relative;display:flex;align-items:center;
+  overflow:hidden;padding:90px 1.5rem 6rem;
+}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.3;}
+.orb-1{width:640px;height:640px;background:radial-gradient(#006a65,transparent 70%);top:-220px;right:-120px;animation:float 9s ease-in-out infinite;}
+.orb-2{width:420px;height:420px;background:radial-gradient(#1a237e,transparent 70%);bottom:-120px;left:-60px;animation:float 7s ease-in-out infinite;animation-delay:-3s;}
+.orb-3{width:280px;height:280px;background:radial-gradient(#d4a847,transparent 70%);top:45%;right:18%;opacity:.12;animation:float 11s ease-in-out infinite;animation-delay:-6s;}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1);}40%{transform:translate(18px,-18px) scale(1.04);}70%{transform:translate(-10px,12px) scale(.96);}}
+.grid-lines{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(119,243,235,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(119,243,235,.025) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+
+.hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:2;text-align:center;}
+
+.badge{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:rgba(119,243,235,.06);border:1px solid rgba(119,243,235,.18);
+  border-radius:24px;padding:.38rem 1rem;
+  font-size:.76rem;font-weight:700;color:#77f3eb;letter-spacing:.06em;
+  margin-bottom:2rem;
+}
+.badge-dot{width:6px;height:6px;background:#77f3eb;border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.55);}}
+
+.hero-title{
+  font-family:'Figtree',sans-serif;font-weight:900;
+  font-size:clamp(4rem,12vw,8.5rem);letter-spacing:-.05em;line-height:.92;
+  background:linear-gradient(140deg,#fff 35%,#77f3eb 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:1.25rem;
+}
+.hero-tag{
+  font-family:'Figtree',sans-serif;font-weight:700;
+  font-size:clamp(1.2rem,2.8vw,1.65rem);
+  color:rgba(255,255,255,.82);letter-spacing:-.01em;margin-bottom:1.2rem;
+}
+.hero-desc{
+  font-size:clamp(.93rem,2vw,1.08rem);
+  color:rgba(255,255,255,.48);max-width:600px;
+  margin:0 auto 2.5rem;line-height:1.72;
+}
+
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:2.75rem;}
+.pill{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);
+  border-radius:24px;padding:.42rem .95rem;
+  font-size:.8rem;font-weight:600;color:rgba(255,255,255,.68);
+  transition:all .25s ease;backdrop-filter:blur(4px);cursor:default;
+}
+.pill:hover{background:rgba(0,106,101,.18);border-color:rgba(119,243,235,.28);color:#77f3eb;transform:translateY(-2px);}
+.pill svg{width:13px;height:13px;flex-shrink:0;}
+
+.hero-ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:.85rem;}
+.btn-hero{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.82rem 1.9rem;border-radius:40px;
+  font-family:'Figtree',sans-serif;font-weight:700;font-size:.97rem;letter-spacing:-.01em;
+  transition:all .25s ease;
+}
+.btn-hero-p{background:#006a65;color:#fff;box-shadow:0 0 32px rgba(0,106,101,.38);}
+.btn-hero-p:hover{background:#008f89;transform:translateY(-2px);box-shadow:0 0 44px rgba(0,106,101,.55);}
+.btn-hero-s{background:rgba(255,255,255,.055);color:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.14);}
+.btn-hero-s:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);transform:translateY(-2px);}
+.btn-hero svg{width:17px;height:17px;}
+
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  color:rgba(255,255,255,.2);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  animation:bob 2.5s ease-in-out infinite;
+}
+.scroll-hint svg{width:15px;height:15px;}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}55%{transform:translateX(-50%) translateY(7px);}}
+
+/* ============================
+   SECTIONS
+============================ */
+section{padding:5.5rem 1.5rem;}
+.si{max-width:1200px;margin:0 auto;}
+.sec-label{
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--primary);margin-bottom:.65rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.sec-label::before{content:'';display:block;width:18px;height:2px;background:var(--primary);border-radius:2px;}
+.sec-h{font-size:clamp(1.65rem,3.8vw,2.65rem);color:var(--text);margin-bottom:.9rem;letter-spacing:-.03em;}
+.sec-sub{font-size:1rem;color:var(--text-muted);max-width:540px;line-height:1.72;}
+
+/* ============================
+   PILLARS
+============================ */
+.pillars-hd{text-align:center;margin-bottom:3.5rem;}
+.pillars-hd .sec-label{justify-content:center;}
+.pillars-hd .sec-label::before{display:none;}
+.pillars-hd .sec-sub{margin:0 auto;}
+
+.pgrid{
+  display:grid;grid-template-columns:1fr;gap:1.25rem;
+}
+@media(min-width:600px){.pgrid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.pgrid{grid-template-columns:repeat(3,1fr);}}
+
+/* Center 4th+5th card in desktop 3-col */
+@media(min-width:1024px){
+  .pgrid{display:grid;grid-template-columns:repeat(6,1fr);}
+  .pcard:nth-child(1){grid-column:1/3;}
+  .pcard:nth-child(2){grid-column:3/5;}
+  .pcard:nth-child(3){grid-column:5/7;}
+  .pcard:nth-child(4){grid-column:2/4;}
+  .pcard:nth-child(5){grid-column:4/6;}
+}
+
+.pcard{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:20px;padding:1.85rem;
+  transition:all var(--tr);position:relative;overflow:hidden;
+}
+.pcard::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--teal));
+  opacity:0;transition:opacity var(--tr);
+}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(0,106,101,.25);}
+.pcard:hover::after{opacity:1;}
+
+.picon{
+  width:46px;height:46px;border-radius:13px;
+  background:var(--primary-glow);border:1px solid rgba(0,106,101,.18);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--primary);margin-bottom:1.15rem;transition:all var(--tr);
+}
+[data-theme="dark"] .picon{color:var(--teal);border-color:rgba(119,243,235,.12);}
+.pcard:hover .picon{background:var(--primary);color:#fff;border-color:var(--primary);transform:scale(1.06);}
+.picon svg{width:20px;height:20px;}
+
+.pnum{font-size:.68rem;font-weight:700;letter-spacing:.1em;color:var(--text-subtle);font-family:'Figtree',sans-serif;margin-bottom:.4rem;}
+.ptitle{font-family:'Figtree',sans-serif;font-size:1.08rem;font-weight:800;color:var(--text);margin-bottom:.55rem;letter-spacing:-.01em;}
+.pdesc{font-size:.875rem;color:var(--text-muted);line-height:1.65;}
+
+/* ============================
+   WHY
+============================ */
+.why{background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.why-grid{display:grid;grid-template-columns:1fr;gap:3.5rem;align-items:center;}
+@media(min-width:900px){.why-grid{grid-template-columns:1fr 1fr;gap:5rem;}}
+
+.why-quote{
+  font-family:'Figtree',sans-serif;font-size:clamp(1.45rem,3.3vw,2.15rem);
+  font-weight:900;color:var(--text);letter-spacing:-.03em;line-height:1.22;
+}
+.why-hl{color:var(--primary);}
+[data-theme="dark"] .why-hl{color:var(--teal);}
+
+.why-feats{display:flex;flex-direction:column;gap:1.4rem;}
+.wfeat{display:flex;gap:.9rem;align-items:flex-start;}
+.wfeat-icon{
+  width:38px;height:38px;border-radius:11px;
+  background:var(--primary-glow);display:flex;align-items:center;
+  justify-content:center;color:var(--primary);flex-shrink:0;
+}
+[data-theme="dark"] .wfeat-icon{color:var(--teal);}
+.wfeat-icon svg{width:17px;height:17px;}
+.wfeat-title{font-family:'Figtree',sans-serif;font-size:.92rem;font-weight:800;color:var(--text);margin-bottom:.22rem;}
+.wfeat-desc{font-size:.84rem;color:var(--text-muted);line-height:1.62;}
+
+/* ============================
+   WAITLIST
+============================ */
+.waitlist{
+  background:linear-gradient(140deg,#000926 0%,#001e1a 100%);
+  position:relative;overflow:hidden;
+}
+.waitlist::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(119,243,235,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(119,243,235,.025) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.waitlist-inner{position:relative;z-index:2;text-align:center;max-width:540px;margin:0 auto;}
+.wl-count{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(119,243,235,.06);border:1px solid rgba(119,243,235,.14);
+  border-radius:20px;padding:.28rem .85rem;
+  font-size:.75rem;font-weight:700;color:#77f3eb;margin-bottom:1.75rem;
+}
+.wl-dot{width:5px;height:5px;background:#77f3eb;border-radius:50%;}
+.wl-title{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:900;color:#fff;letter-spacing:-.03em;margin-bottom:.7rem;}
+.wl-sub{font-size:.97rem;color:rgba(255,255,255,.46);margin-bottom:2rem;line-height:1.68;}
+.wl-form{display:flex;gap:.65rem;flex-wrap:wrap;}
+.wl-input{
+  flex:1;min-width:190px;padding:.8rem 1.2rem;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);
+  border-radius:40px;color:#fff;font-size:.88rem;font-family:'Inter',sans-serif;
+  outline:none;transition:all .25s;
+}
+.wl-input::placeholder{color:rgba(255,255,255,.28);}
+.wl-input:focus{background:rgba(255,255,255,.08);border-color:rgba(119,243,235,.38);}
+.wl-btn{
+  padding:.8rem 1.65rem;background:#006a65;color:#fff;border-radius:40px;
+  font-family:'Figtree',sans-serif;font-weight:700;font-size:.88rem;
+  white-space:nowrap;transition:all .25s;
+}
+.wl-btn:hover{background:#008f89;transform:translateY(-1px);box-shadow:0 0 22px rgba(0,106,101,.5);}
+.wl-note{margin-top:.9rem;font-size:.72rem;color:rgba(255,255,255,.27);}
+
+/* ============================
+   FOOTER
+============================ */
+.footer{background:#000926;border-top:1px solid rgba(255,255,255,.055);padding:2.75rem 1.5rem 1.75rem;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;margin-bottom:2.25rem;}
+.footer-brand-name{font-family:'Figtree',sans-serif;font-weight:900;font-size:1.45rem;color:#fff;letter-spacing:-.03em;margin-bottom:.2rem;}
+.footer-brand-sub{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em;}
+.footer-tagline{font-size:.82rem;color:rgba(255,255,255,.36);margin-top:.6rem;max-width:240px;line-height:1.55;}
+.footer-cols{display:flex;gap:3rem;flex-wrap:wrap;}
+.fcol-title{font-family:'Figtree',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:.65rem;}
+.fcol a{display:block;font-size:.82rem;color:rgba(255,255,255,.44);padding:.18rem 0;transition:color .2s;}
+.fcol a:hover{color:#77f3eb;}
+.footer-div{border:none;border-top:1px solid rgba(255,255,255,.055);margin-bottom:1.25rem;}
+.footer-bot{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;font-size:.75rem;color:rgba(255,255,255,.22);}
+.footer-bot-links{display:flex;gap:1.35rem;}
+.footer-bot-links a{color:rgba(255,255,255,.22);transition:color .2s;}
+.footer-bot-links a:hover{color:rgba(255,255,255,.55);}
+
+/* ============================
+   ANIMATIONS
+============================ */
+.fu{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.fu.vis{opacity:1;transform:translateY(0);}
+.fd1{transition-delay:.08s;}.fd2{transition-delay:.16s;}.fd3{transition-delay:.24s;}
+.fd4{transition-delay:.32s;}.fd5{transition-delay:.40s;}
+
+@media(max-width:600px){
+  section{padding:3.75rem 1.25rem;}
+  .hero{padding:80px 1.25rem 4.5rem;}
+  .hero-title{font-size:clamp(3.2rem,18vw,5rem);}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-name">LifeQuest<span class="logo-dot"></span></div>
+      <div class="logo-sub">by Medinovatech</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="#pillars" class="nav-link" data-en="Features" data-id="Fitur">Features</a>
+      <a href="#why" class="nav-link" data-en="Why LifeQuest" data-id="Mengapa LifeQuest">Why LifeQuest</a>
+      <a href="#waitlist" class="nav-link" data-en="Join Waitlist" data-id="Daftar Waitlist">Join Waitlist</a>
+    </div>
+
+    <div class="nav-actions">
+      <div class="lang-sw">
+        <button class="lang-btn on" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btn-id" onclick="setLang('id')">ID</button>
+      </div>
+
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17" style="display:none">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="17" height="17">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <a href="/app/" class="btn-nav">
+        <span data-en="Start Your Quest" data-id="Mulai Questmu">Start Your Quest</span>
+      </a>
+
+      <button class="burger" onclick="toggleMob()" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17">
+          <line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mob-menu" id="mob-menu">
+    <a href="#pillars" class="nav-link" data-en="Features" data-id="Fitur" onclick="closeMob()">Features</a>
+    <a href="#why" class="nav-link" data-en="Why LifeQuest" data-id="Mengapa LifeQuest" onclick="closeMob()">Why LifeQuest</a>
+    <a href="#waitlist" class="nav-link" data-en="Join Waitlist" data-id="Daftar Waitlist" onclick="closeMob()">Join Waitlist</a>
+    <a href="/app/" class="btn-nav" style="display:flex;margin-top:.5rem;" onclick="closeMob()">
+      <span data-en="Start Your Quest" data-id="Mulai Questmu">Start Your Quest</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-lines"></div>
+  </div>
+
+  <div class="hero-inner" id="hero-content">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      <span data-en="Coming 2026 &nbsp;·&nbsp; Medinovatech Platform" data-id="Hadir 2026 &nbsp;·&nbsp; Platform Medinovatech">Coming 2026 &nbsp;·&nbsp; Medinovatech Platform</span>
+    </div>
+
+    <h1 class="hero-title">LifeQuest</h1>
+
+    <p class="hero-tag">
+      <span data-en="Discover Your Purpose. Build Your Impact." data-id="Temukan Tujuanmu. Bangun Dampakmu.">Discover Your Purpose. Build Your Impact.</span>
+    </p>
+
+    <p class="hero-desc">
+      <span data-en="Find the people you want to help, the problems worth solving, and the skills needed to create a meaningful future." data-id="Temukan orang-orang yang ingin kamu bantu, masalah yang layak diselesaikan, dan keterampilan yang dibutuhkan untuk menciptakan masa depan yang bermakna.">Find the people you want to help, the problems worth solving, and the skills needed to create a meaningful future.</span>
+    </p>
+
+    <div class="pills">
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><line x1="12" y1="2.5" x2="12" y2="8.5"/><line x1="12" y1="15.5" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="8.5" y2="12"/><line x1="15.5" y1="12" x2="21.5" y2="12"/></svg>
+        <span data-en="Discover Yourself" data-id="Kenali Dirimu">Discover Yourself</span>
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span data-en="Explore Future Careers" data-id="Jelajahi Karier Masa Depan">Explore Future Careers</span>
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span data-en="Build Future-Proof Skills" data-id="Bangun Keterampilan Anti-Usang">Build Future-Proof Skills</span>
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 7 9 3 15 7 21 3 21 17 15 21 9 17 3 21"/><line x1="9" y1="3" x2="9" y2="17"/><line x1="15" y1="7" x2="15" y2="21"/></svg>
+        <span data-en="Design Your Learning Journey" data-id="Rancang Perjalanan Belajarmu">Design Your Learning Journey</span>
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6"/><path d="M15.5 7.5l3 3"/></svg>
+        <span data-en="Prepare for Admissions" data-id="Persiapkan Seleksi Masuk">Prepare for Admissions</span>
+      </span>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="/app/" class="btn-hero btn-hero-p">
+        <span data-en="Start Your Quest" data-id="Mulai Petualanganmu">Start Your Quest</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="#pillars" class="btn-hero btn-hero-s">
+        <span data-en="See How It Works" data-id="Lihat Cara Kerjanya">See How It Works</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span data-en="scroll" data-id="gulir">scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section id="pillars" style="background:var(--bg);">
+  <div class="si">
+    <div class="pillars-hd fu">
+      <div class="sec-label" data-en="The 5 Pillars" data-id="5 Pilar Utama">The 5 Pillars</div>
+      <h2 class="sec-h" data-en="Everything you need to build a meaningful future." data-id="Semua yang kamu butuhkan untuk membangun masa depan yang bermakna.">Everything you need to build a meaningful future.</h2>
+      <p class="sec-sub" data-en="LifeQuest brings five interconnected dimensions of self-discovery and career readiness into one cohesive platform." data-id="LifeQuest mengintegrasikan lima dimensi penemuan diri dan kesiapan karier ke dalam satu platform yang terpadu.">LifeQuest brings five interconnected dimensions of self-discovery and career readiness into one cohesive platform.</p>
+    </div>
+
+    <div class="pgrid">
+      <div class="pcard fu fd1">
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><line x1="12" y1="2.5" x2="12" y2="8.5"/><line x1="12" y1="15.5" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="8.5" y2="12"/><line x1="15.5" y1="12" x2="21.5" y2="12"/></svg></div>
+        <div class="pnum">01</div>
+        <div class="ptitle" data-en="Discover Yourself" data-id="Kenali Dirimu">Discover Yourself</div>
+        <div class="pdesc" data-en="Know who you are — your strengths, values, passions, and the unique lens you bring to the world. Build your self-model before designing your future." data-id="Kenali dirimu — kekuatan, nilai, passion, dan perspektif unik yang kamu bawa ke dunia. Bangun gambaran dirimu sebelum merancang masa depanmu.">Know who you are — your strengths, values, passions, and the unique lens you bring to the world. Build your self-model before designing your future.</div>
+      </div>
+
+      <div class="pcard fu fd2">
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="pnum">02</div>
+        <div class="ptitle" data-en="Explore Future Careers" data-id="Jelajahi Karier Masa Depan">Explore Future Careers</div>
+        <div class="pdesc" data-en="Navigate emerging professions being reshaped by AI, climate, and technology. Find the people whose lives you want to change." data-id="Jelajahi profesi baru yang dibentuk ulang oleh AI, iklim, dan teknologi. Temukan orang-orang yang ingin kamu bantu.">Navigate emerging professions being reshaped by AI, climate, and technology. Find the people whose lives you want to change.</div>
+      </div>
+
+      <div class="pcard fu fd3">
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="pnum">03</div>
+        <div class="ptitle" data-en="Build Future-Proof Skills" data-id="Bangun Keterampilan Anti-Usang">Build Future-Proof Skills</div>
+        <div class="pdesc" data-en="Master the skills that matter most: critical thinking, creativity, AI fluency, and genuine human connection. Stay relevant no matter how the world changes." data-id="Kuasai keterampilan paling penting: berpikir kritis, kreativitas, literasi AI, dan koneksi manusiawi. Tetap relevan apapun perubahan yang terjadi.">Master the skills that matter most: critical thinking, creativity, AI fluency, and genuine human connection. Stay relevant no matter how the world changes.</div>
+      </div>
+
+      <div class="pcard fu fd4">
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 7 9 3 15 7 21 3 21 17 15 21 9 17 3 21"/><line x1="9" y1="3" x2="9" y2="17"/><line x1="15" y1="7" x2="15" y2="21"/></svg></div>
+        <div class="pnum">04</div>
+        <div class="ptitle" data-en="Design Your Learning Journey" data-id="Rancang Perjalanan Belajarmu">Design Your Learning Journey</div>
+        <div class="pdesc" data-en="Chart a personalized roadmap that bridges where you are today to where you want to be. Set milestones, curate resources, and track your growth." data-id="Buat peta jalan personal dari posisimu hari ini ke tujuanmu. Tetapkan milestone, kurasi sumber belajar, dan pantau perkembanganmu.">Chart a personalized roadmap that bridges where you are today to where you want to be. Set milestones, curate resources, and track your growth.</div>
+      </div>
+
+      <div class="pcard fu fd5">
+        <div class="picon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6"/><path d="M15.5 7.5l3 3"/></svg></div>
+        <div class="pnum">05</div>
+        <div class="ptitle" data-en="Prepare for Admissions" data-id="Persiapkan Seleksi Masuk">Prepare for Admissions</div>
+        <div class="pdesc" data-en="Craft compelling applications that open doors to universities, scholarships, and life-changing opportunities — guided by clarity of purpose, not just grades." data-id="Buat aplikasi yang kuat untuk membuka pintu universitas, beasiswa, dan peluang besar — dipandu kejelasan tujuan, bukan sekadar nilai.">Craft compelling applications that open doors to universities, scholarships, and life-changing opportunities — guided by clarity of purpose, not just grades.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY LIFEQUEST -->
+<section class="why" id="why">
+  <div class="si">
+    <div class="why-grid">
+      <div class="fu">
+        <div class="sec-label" data-en="Why LifeQuest" data-id="Mengapa LifeQuest">Why LifeQuest</div>
+        <p class="why-quote">
+          <span data-en="Not just another career test." data-id="Bukan sekadar tes karier biasa.">Not just another career test.</span>
+          <span class="why-hl" data-en=" A living system that evolves with you." data-id=" Sebuah sistem hidup yang berkembang bersamamu."> A living system that evolves with you.</span>
+        </p>
+      </div>
+
+      <div class="why-feats">
+        <div class="wfeat fu fd1">
+          <div class="wfeat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <div>
+            <div class="wfeat-title" data-en="Purpose-Driven" data-id="Berbasis Tujuan Hidup">Purpose-Driven</div>
+            <div class="wfeat-desc" data-en="Every feature is anchored to one question: what kind of impact do you want to have? We help you find your answer." data-id="Setiap fitur berangkat dari satu pertanyaan: dampak apa yang ingin kamu ciptakan? Kami membantu menemukan jawabannya.">Every feature is anchored to one question: what kind of impact do you want to have? We help you find your answer.</div>
+          </div>
+        </div>
+
+        <div class="wfeat fu fd2">
+          <div class="wfeat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div class="wfeat-title" data-en="Personalized, Not Generic" data-id="Personal, Bukan Generik">Personalized, Not Generic</div>
+            <div class="wfeat-desc" data-en="Your journey is uniquely yours. LifeQuest adapts to your context, background, and goals — not a one-size-fits-all path." data-id="Perjalananmu adalah milikmu sendiri. LifeQuest beradaptasi dengan konteks, latar belakang, dan tujuanmu — bukan jalur yang sama untuk semua.">Your journey is uniquely yours. LifeQuest adapts to your context, background, and goals — not a one-size-fits-all path.</div>
+          </div>
+        </div>
+
+        <div class="wfeat fu fd3">
+          <div class="wfeat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <div class="wfeat-title" data-en="Future-Focused" data-id="Berorientasi Masa Depan">Future-Focused</div>
+            <div class="wfeat-desc" data-en="We map the world as it's becoming, not just as it is. Skills, careers, and opportunities are curated for the next decade." data-id="Kami memetakan dunia sebagaimana ia akan menjadi, bukan hanya sebagaimana adanya. Konten dikurasi untuk dekade berikutnya.">We map the world as it's becoming, not just as it is. Skills, careers, and opportunities are curated for the next decade.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist" id="waitlist">
+  <div class="waitlist-inner">
+    <div class="wl-count fu">
+      <span class="wl-dot"></span>
+      <span data-en="500+ students already on the waitlist" data-id="500+ pelajar sudah di waitlist">500+ students already on the waitlist</span>
+    </div>
+    <h2 class="wl-title fu" data-en="Be the First to Start Your Quest." data-id="Jadilah yang Pertama Memulai Questmu.">Be the First to Start Your Quest.</h2>
+    <p class="wl-sub fu" data-en="Join the waitlist and get early access, exclusive updates, and a front-row seat to a new way of thinking about your future." data-id="Daftar waitlist dan dapatkan akses awal, update eksklusif, serta kesempatan pertama untuk cara baru berpikir tentang masa depanmu.">Join the waitlist and get early access, exclusive updates, and a front-row seat to a new way of thinking about your future.</p>
+    <form class="wl-form fu" onsubmit="handleWL(event)">
+      <input type="email" class="wl-input" id="wl-email"
+        data-en-ph="Your email address" data-id-ph="Alamat email kamu"
+        placeholder="Your email address" required autocomplete="email"/>
+      <button type="submit" class="wl-btn">
+        <span data-en="Join Waitlist" data-id="Daftar Waitlist">Join Waitlist</span>
+      </button>
+    </form>
+    <p class="wl-note fu" data-en="No spam. Unsubscribe anytime." data-id="Tidak ada spam. Bisa berhenti kapan saja.">No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">LifeQuest</div>
+        <div class="footer-brand-sub">by Medinovatech &nbsp;·&nbsp; Coming 2026</div>
+        <p class="footer-tagline" data-en="Discover Your Purpose. Build Your Impact." data-id="Temukan Tujuanmu. Bangun Dampakmu.">Discover Your Purpose. Build Your Impact.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="fcol">
+          <div class="fcol-title" data-en="Platform" data-id="Platform">Platform</div>
+          <a href="#pillars" data-en="Features" data-id="Fitur">Features</a>
+          <a href="#why" data-en="Why LifeQuest" data-id="Mengapa LifeQuest">Why LifeQuest</a>
+          <a href="#waitlist" data-en="Join Waitlist" data-id="Daftar Waitlist">Join Waitlist</a>
+        </div>
+        <div class="fcol">
+          <div class="fcol-title">Medinovatech</div>
+          <a href="https://medinovatech.com" target="_blank" rel="noopener">medinovatech.com</a>
+          <a href="https://academy.medinovatech.com" target="_blank" rel="noopener">Academy</a>
+          <a href="https://aimedic.medinovatech.com" target="_blank" rel="noopener">AIMedic</a>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-div"/>
+    <div class="footer-bot">
+      <span data-en="© 2026 LifeQuest by Medinovatech. All rights reserved." data-id="© 2026 LifeQuest by Medinovatech. Hak cipta dilindungi.">© 2026 LifeQuest by Medinovatech. All rights reserved.</span>
+      <div class="footer-bot-links">
+        <a href="#" data-en="Privacy" data-id="Privasi">Privacy</a>
+        <a href="#" data-en="Terms" data-id="Syarat">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================
+   THEME
+============================ */
+const html = document.documentElement;
+const sun  = document.getElementById('ico-sun');
+const moon = document.getElementById('ico-moon');
+
+function applyTheme(t) {
+  html.setAttribute('data-theme', t);
+  localStorage.setItem('lq-theme', t);
+  sun.style.display  = t === 'dark' ? 'block' : 'none';
+  moon.style.display = t === 'dark' ? 'none'  : 'block';
+}
+function toggleTheme() {
+  applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+}
+applyTheme(localStorage.getItem('lq-theme') || 'dark');
+
+/* ============================
+   LANGUAGE
+============================ */
+let lang = localStorage.getItem('lq-lang') || 'en';
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lq-lang', l);
+  html.lang = l;
+
+  document.querySelectorAll('[data-en]').forEach(el => {
+    // Only update leaf text nodes (no child elements)
+    if (el.children.length === 0) {
+      const val = el.getAttribute('data-' + l) || el.getAttribute('data-en') || '';
+      el.innerHTML = val; // use innerHTML to support &nbsp; entities
+    }
+  });
+
+  // Email input placeholder
+  const inp = document.getElementById('wl-email');
+  if (inp) inp.placeholder = inp.getAttribute('data-' + l + '-ph') || '';
+
+  document.getElementById('btn-en').classList.toggle('on', l === 'en');
+  document.getElementById('btn-id').classList.toggle('on', l === 'id');
+}
+setLang(lang);
+
+/* ============================
+   MOBILE MENU
+============================ */
+function toggleMob()  { document.getElementById('mob-menu').classList.toggle('open'); }
+function closeMob()   { document.getElementById('mob-menu').classList.remove('open'); }
+
+/* ============================
+   SCROLL ANIMATIONS
+============================ */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+/* ============================
+   HERO ENTRANCE
+============================ */
+window.addEventListener('load', () => {
+  const kids = document.getElementById('hero-content').children;
+  Array.from(kids).forEach((el, i) => {
+    el.style.cssText += `opacity:0;transform:translateY(22px);transition:opacity .7s ease ${i*0.1}s,transform .7s ease ${i*0.1}s;`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }));
+  });
+});
+
+/* ============================
+   NAV SHADOW ON SCROLL
+============================ */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.boxShadow =
+    window.scrollY > 20 ? '0 4px 24px rgba(0,0,0,.15)' : 'none';
+}, { passive: true });
+
+/* ============================
+   WAITLIST
+============================ */
+function handleWL(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.wl-btn');
+  const sp  = btn.querySelector('span');
+  sp.innerHTML = lang === 'id' ? 'Mendaftar...' : 'Joining...';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    sp.innerHTML = lang === 'id' ? 'Terdaftar!' : "You're in!";
+    btn.style.background = '#16a34a';
+    document.getElementById('wl-email').value = '';
+    setTimeout(() => {
+      setLang(lang); // restore button text
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  }, 900);
+}
+</script>
+</body>
+</html>
