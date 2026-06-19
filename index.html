@@ -217,6 +217,39 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
 .kampus-akr.unggul{background:rgba(34,197,94,.12);color:#22c55e}
 .kampus-akr.baik-sekali{background:rgba(245,158,11,.12);color:#f59e0b}
 
+/* ── IKIGAI QUICK ── */
+.ikigai-step{min-height:calc(100vh - 200px);display:flex;flex-direction:column;justify-content:center;animation:fadeIn .4s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.ikigai-title{font-size:1.4rem;font-weight:900;margin-bottom:8px;color:var(--text)}
+.ikigai-subtitle{font-size:.88rem;color:var(--muted);line-height:1.65;margin-bottom:20px}
+.ikigai-input-group{margin-bottom:20px}
+.ikigai-label{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}
+.ikigai-tag-input{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:var(--bg-card2);border:1.5px solid var(--border);border-radius:10px;min-height:44px;transition:all .2s ease;cursor:text}
+.ikigai-tag-input:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--glow);background:var(--bg-card)}
+.ikigai-tag-input input{flex:1;min-width:80px;background:none;border:none;color:var(--text);font-family:inherit;font-size:.85rem;outline:none}
+.ikigai-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--primary);color:#fff;border-radius:20px;font-size:.82rem;font-weight:600;animation:tagPopIn .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes tagPopIn{from{opacity:0;transform:scale(.7);}to{opacity:1;transform:none;}}
+.ikigai-tag button{background:none;border:none;color:#fff;cursor:pointer;font-size:1rem;padding:0;opacity:.7;transition:opacity .15s;flex-shrink:0}
+.ikigai-tag button:hover{opacity:1}
+.ikigai-tag button:active{transform:scale(.9)}
+.ikigai-intersection{background:rgba(119,243,235,.08);border:1.5px solid rgba(119,243,235,.3);border-radius:12px;padding:16px;margin-bottom:16px;text-align:center;animation:intersectionReveal .5s ease-out;box-shadow:inset 0 0 20px rgba(119,243,235,.1)}
+@keyframes intersectionReveal{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+.ikigai-intersection-title{font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:5px}
+.ikigai-intersection-title::before{content:'✨';display:inline-block;animation:twinkle .8s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.5;}50%{opacity:1;}}
+.ikigai-intersection-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.ikigai-intersection-tags .ikigai-tag{animation-delay:.1s}
+.ikigai-nav{display:flex;gap:10px;margin-top:24px}
+.ikigai-nav .btn-p{flex:2;transition:all .15s cubic-bezier(.4,0,.2,1)}
+.ikigai-nav .btn-p:active:not(:disabled){transform:scale(.98)}
+.ikigai-nav .btn-s{flex:1;transition:all .15s cubic-bezier(.4,0,.2,1)}
+.ikigai-nav .btn-s:active:not(:disabled){transform:scale(.98)}
+.ikigai-nav button:disabled{opacity:.5;cursor:not-allowed}
+.ikigai-progress{display:flex;align-items:center;gap:6px;margin-bottom:20px}
+.ikigai-progress-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s cubic-bezier(.34,1.56,.64,1)}
+.ikigai-progress-dot.active{background:var(--primary);animation:dotPulse .6s ease-in-out infinite}
+@keyframes dotPulse{0%{transform:scale(1);}50%{transform:scale(1.4);}100%{transform:scale(1);}}
+
 /* ── CAREER INTELLIGENCE ── */
 .ci-hero{text-align:center;padding:24px 0 20px}
 .ci-icon-wrap{width:72px;height:72px;border-radius:18px;background:var(--bg-card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin:0 auto 14px}
@@ -385,7 +418,54 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
   </div>
 </section>
 
-<!-- S1: ASSESSMENT -->
+<!-- S0.5: ASSESSMENT PATH CHOICE -->
+<section id="s0-5" class="screen">
+  <div class="inner">
+    <div class="badge">Kenali Dirimu</div>
+    <h2 style="font-size:1.55rem;font-weight:900;margin-bottom:8px">Pilih Cara Mengenal Diri</h2>
+    <p style="color:var(--muted);font-size:.87rem;line-height:1.65;margin-bottom:24px">Dua pilihan untuk menemukan passion dan karier yang cocok untukmu.</p>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px">
+      <div class="menu-card" onclick="goScreen(1)">
+        <div class="menu-card-head">
+          <div class="menu-card-icon teal">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="9"/><path d="M11 6v5l3 3"/><path d="M6 11h1M15 11h1M11 6v1M11 15v1"/></svg>
+          </div>
+          <div>
+            <div class="menu-card-label teal">RIASEC</div>
+            <div class="menu-card-title">Assessment Detail (36 soal)</div>
+          </div>
+        </div>
+        <p class="menu-card-desc">Analisis mendalam 6 dimensi kepribadian. Cocok untuk yang suka detail dan ingin eksplorasi luas.</p>
+        <div class="menu-card-tags">
+          <span class="menu-tag">10 menit</span>
+          <span class="menu-tag">Comprehensive</span>
+        </div>
+      </div>
+
+      <div class="menu-card" onclick="goScreen('s1b')">
+        <div class="menu-card-head">
+          <div class="menu-card-icon indigo">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="4"/><path d="M6 6l4 4M12 12l4 4M16 6l-4 4M6 16l4-4"/></svg>
+          </div>
+          <div>
+            <div class="menu-card-label indigo">Ikigai Quick</div>
+            <div class="menu-card-title">Assessment Cepat (4 pertanyaan)</div>
+          </div>
+        </div>
+        <p class="menu-card-desc">Temukan passion via hobi, keahlian, earning history, dan target impact. Cocok untuk yang sudah punya clarity awal.</p>
+        <div class="menu-card-tags">
+          <span class="menu-tag">2 menit</span>
+          <span class="menu-tag">Focused</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-s" onclick="goScreen(0)" style="width:100%">&#8592; Beranda</button>
+  </div>
+</section>
+
+<!-- S1: RIASEC ASSESSMENT -->
 <section id="s1" class="screen">
   <div class="inner">
     <div class="assess-top">
@@ -398,6 +478,13 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
       <button class="btn-s" id="btn-prev" onclick="assessPrev()" style="display:none">&#8592; Sebelumnya</button>
       <button class="btn-p" id="btn-next" onclick="assessNext()">Selanjutnya &#8594;</button>
     </div>
+  </div>
+</section>
+
+<!-- S1b: IKIGAI QUICK ASSESSMENT -->
+<section id="s1b" class="screen">
+  <div class="inner">
+    <div id="ikigai-step" class="ikigai-step"></div>
   </div>
 </section>
 
@@ -842,10 +929,135 @@ function toggleTheme(){theme=theme==='dark'?'light':'dark';document.documentElem
 // NAV
 const STEP_NAMES=['Selamat Datang','Assessment','Misi','Karier','Hasil'];
 function updateProgress(){const pct=(state.pg/4)*100;document.getElementById('prog-fill').style.width=pct+'%';document.getElementById('step-lbl').textContent=STEP_NAMES[state.pg]||'';}
-function goScreen(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s'+n).classList.add('active');state.pg=n;updateProgress();window.scrollTo({top:0,behavior:'smooth'});}
+function goScreen(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById(typeof n==='string'?n:'s'+n);if(el)el.classList.add('active');state.pg=n;updateProgress();window.scrollTo({top:0,behavior:'smooth'});}
 
 // S0
-function goAssess(){goScreen(1);state.apg=0;saveState();renderAssessPage();}
+function goAssess(){goScreen('s0-5');}
+
+// S0.5 - Path choice handled via onclick in HTML
+
+// S1b - Ikigai Quick Assessment
+let ikigaiState={step:1,hobi:[],jago:[],earnings:[],passion:[],target:''};
+
+function renderIkigaiStep(){
+  const con=document.getElementById('ikigai-step');
+  if(ikigaiState.step===1){
+    con.innerHTML=`
+      <div class="ikigai-progress">${[1,2,3,4,5].map(i=>`<div class="ikigai-progress-dot${i<=ikigaiState.step?' active':''}"></div>`).join('')}</div>
+      <h2 class="ikigai-title">Apa hobi kamu?</h2>
+      <p class="ikigai-subtitle">Sebutkan 3-5 hal yang kamu suka lakukan di waktu luang. Tidak perlu yang "serius", apapun yang fun.</p>
+      <div class="ikigai-input-group">
+        <div class="ikigai-label">Hobi</div>
+        <div class="ikigai-tag-input" id="ikigai-hobi-input">
+          ${ikigaiState.hobi.map(h=>`<span class="ikigai-tag">${h}<button type="button" onclick="removeIkigaiTag('hobi','${h}')">×</button></span>`).join('')}
+          <input type="text" id="hobi-inp" placeholder="Ketik & tekan Enter..." onkeypress="ikigaiTagInput(event,'hobi')"/>
+        </div>
+      </div>
+      <div class="ikigai-nav">
+        <button class="btn-s" onclick="goScreen(0)">&#8592; Batal</button>
+        <button class="btn-p" onclick="ikigaiStep2()" ${ikigaiState.hobi.length<3?'disabled style="opacity:.5;cursor:not-allowed"':''}>Lanjut &#8594;</button>
+      </div>
+    `;
+    document.getElementById('hobi-inp')?.focus();
+  }
+  else if(ikigaiState.step===2){
+    con.innerHTML=`
+      <div class="ikigai-progress">${[1,2,3,4,5].map(i=>`<div class="ikigai-progress-dot${i<=ikigaiState.step?' active':''}"></div>`).join('')}</div>
+      <h2 class="ikigai-title">Apa yang kamu jago?</h2>
+      <p class="ikigai-subtitle">Kemampuan atau skill yang kamu kuasai (bisa hard skill atau soft skill).</p>
+      <div class="ikigai-input-group">
+        <div class="ikigai-label">Keahlian</div>
+        <div class="ikigai-tag-input" id="ikigai-jago-input">
+          ${ikigaiState.jago.map(j=>`<span class="ikigai-tag">${j}<button type="button" onclick="removeIkigaiTag('jago','${j}')">×</button></span>`).join('')}
+          <input type="text" id="jago-inp" placeholder="Ketik & tekan Enter..." onkeypress="ikigaiTagInput(event,'jago')"/>
+        </div>
+      </div>
+      <div class="ikigai-nav">
+        <button class="btn-s" onclick="ikigaiState.step=1;renderIkigaiStep()">&#8592; Kembali</button>
+        <button class="btn-p" onclick="ikigaiStep3()" ${ikigaiState.jago.length<3?'disabled style="opacity:.5;cursor:not-allowed"':''}>Lanjut &#8594;</button>
+      </div>
+    `;
+    document.getElementById('jago-inp')?.focus();
+  }
+  else if(ikigaiState.step===3){
+    const inter=ikigaiState.hobi.filter(h=>ikigaiState.jago.some(j=>j.toLowerCase().includes(h.toLowerCase())||h.toLowerCase().includes(j.toLowerCase())));
+    con.innerHTML=`
+      <div class="ikigai-progress">${[1,2,3,4,5].map(i=>`<div class="ikigai-progress-dot${i<=ikigaiState.step?' active':''}"></div>`).join('')}</div>
+      <h2 class="ikigai-title">Passion-mu Adalah...</h2>
+      <p class="ikigai-subtitle">${inter.length?'Lihat perpotongan antara yang kamu suka dan yang kamu jago:':'Tidak ada perpotongan? Itu OK. Pilih yang mau dikuasain atau yang paling suka dari daftar di bawah.'}</p>
+      ${inter.length?`<div class="ikigai-intersection"><div class="ikigai-intersection-title">💡 Passion (Intersection)</div><div class="ikigai-intersection-tags">${inter.map(p=>`<span class="ikigai-tag">${p}</span>`).join('')}</div></div>`:''}
+      <div class="ikigai-input-group">
+        <div class="ikigai-label">Pilih 2-3 passion kamu</div>
+        <div class="ikigai-tag-input">
+          ${ikigaiState.passion.map(p=>`<span class="ikigai-tag">${p}<button type="button" onclick="removeIkigaiTag('passion','${p}')">×</button></span>`).join('')}
+          <input type="text" id="passion-inp" placeholder="Dari hobi & jago, pilih passion..." list="passion-list"/>
+          <datalist id="passion-list">${[...ikigaiState.hobi,...ikigaiState.jago].map(x=>`<option>${x}</option>`).join('')}</datalist>
+        </div>
+      </div>
+      <div class="ikigai-nav">
+        <button class="btn-s" onclick="ikigaiState.step=2;renderIkigaiStep()">&#8592; Kembali</button>
+        <button class="btn-p" onclick="ikigaiStep4()" ${ikigaiState.passion.length<2?'disabled style="opacity:.5;cursor:not-allowed"':''}>Lanjut &#8594;</button>
+      </div>
+    `;
+    document.getElementById('passion-inp')?.focus();
+  }
+  else if(ikigaiState.step===4){
+    con.innerHTML=`
+      <div class="ikigai-progress">${[1,2,3,4,5].map(i=>`<div class="ikigai-progress-dot${i<=ikigaiState.step?' active':''}"></div>`).join('')}</div>
+      <h2 class="ikigai-title">Earning History</h2>
+      <p class="ikigai-subtitle">Pernah dapet uang dari aktivitas apa? Ini bantu konfirm passion-mu yang marketable.</p>
+      <div class="ikigai-input-group">
+        <div class="ikigai-label">Sudah earning dari...</div>
+        <div class="ikigai-tag-input">
+          ${ikigaiState.earnings.map(e=>`<span class="ikigai-tag">${e}<button type="button" onclick="removeIkigaiTag('earnings','${e}')">×</button></span>`).join('')}
+          <input type="text" id="earnings-inp" placeholder="Ketik & tekan Enter..." onkeypress="ikigaiTagInput(event,'earnings')"/>
+        </div>
+      </div>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:12px">💡 Tidak ada earning yet? Oke, skip. Tapi kalau ada yang sudah, itu clue besar untuk passion yang bisa jadi karier.</p>
+      <div class="ikigai-nav">
+        <button class="btn-s" onclick="ikigaiState.step=3;renderIkigaiStep()">&#8592; Kembali</button>
+        <button class="btn-p" onclick="ikigaiStep5()">Lanjut &#8594;</button>
+      </div>
+    `;
+    document.getElementById('earnings-inp')?.focus();
+  }
+  else if(ikigaiState.step===5){
+    con.innerHTML=`
+      <div class="ikigai-progress">${[1,2,3,4,5].map(i=>`<div class="ikigai-progress-dot${i<=ikigaiState.step?' active':''}"></div>`).join('')}</div>
+      <h2 class="ikigai-title">Siapa yang mau kamu bantu?</h2>
+      <p class="ikigai-subtitle">Target impact: siapa yang jadi fokus kontribusi kamu?</p>
+      <div class="chips" id="ikigai-target"></div>
+      <div class="ikigai-nav">
+        <button class="btn-s" onclick="ikigaiState.step=4;renderIkigaiStep()">&#8592; Kembali</button>
+        <button class="btn-p" onclick="ikigaiFinish()">Selesai! Cari Karier &#8594;</button>
+      </div>
+    `;
+    renderTargetChips('ikigai-target','ikigai');
+  }
+}
+
+function ikigaiTagInput(e,field){if(e.key==='Enter'){e.preventDefault();const v=e.target.value.trim();if(v)ikigaiState[field].push(v);e.target.value='';renderIkigaiStep();}}
+function removeIkigaiTag(field,tag){ikigaiState[field]=ikigaiState[field].filter(x=>x!==tag);renderIkigaiStep();}
+function ikigaiStep2(){ikigaiState.step=2;renderIkigaiStep();}
+function ikigaiStep3(){ikigaiState.step=3;renderIkigaiStep();}
+function ikigaiStep4(){ikigaiState.step=4;renderIkigaiStep();}
+function ikigaiStep5(){ikigaiState.step=5;renderIkigaiStep();}
+function renderTargetChips(id,src){
+  const targets=['Kesehatan','Lingkungan','Pendidikan','Ekonomi','Seni','Teknologi','Sosial','Keamanan'];
+  document.getElementById(id).innerHTML=targets.map(t=>`<div class="chip" onclick="selectTarget('${t}',this,src)">${t}</div>`).join('');
+}
+function selectTarget(t,el,src){el.classList.toggle('sel');ikigaiState.target=t;saveState();}
+function ikigaiFinish(){state.ikigaiResult={passion:ikigaiState.passion,earnings:ikigaiState.earnings,target:ikigaiState.target};computeIkigaiMatch();goScreen(3);}
+function computeIkigaiMatch(){
+  // Simple match: careers yg punya "passion words" di skills
+  state.topCareers=CAREERS.map(c=>{
+    let match=0;
+    ikigaiState.passion.forEach(p=>{if(c.skills.some(s=>s.toLowerCase().includes(p.toLowerCase())||p.toLowerCase().includes(s.toLowerCase())))match+=30;});
+    if(ikigaiState.target&&c.targets.includes(ikigaiState.target))match+=40;
+    return{...c,match:Math.min(98,match)};
+  }).sort((a,b)=>b.match-a.match);
+  saveState();
+}
 function goExploreCareer(){
   if(!state.topCareers||!state.topCareers.length){
     DIMS_ORDER.forEach(d=>state.scores[d]=60);
