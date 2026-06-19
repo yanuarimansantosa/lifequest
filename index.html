@@ -952,7 +952,7 @@ function toggleTheme(){theme=theme==='dark'?'light':'dark';document.documentElem
 // NAV
 const STEP_NAMES=['Selamat Datang','Assessment','Misi','Karier','Hasil'];
 function updateProgress(){const pct=(state.pg/4)*100;document.getElementById('prog-fill').style.width=pct+'%';document.getElementById('step-lbl').textContent=STEP_NAMES[state.pg]||'';}
-function goScreen(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById(typeof n==='string'?n:'s'+n);if(el)el.classList.add('active');state.pg=n;updateProgress();updateNavActive(n);window.scrollTo({top:0,behavior:'smooth'});}
+function goScreen(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById(typeof n==='string'?n:'s'+n);if(el)el.classList.add('active');state.pg=n;updateProgress();updateNavActive(n);if(n==='s1b'||n==1.5)renderIkigaiStep();window.scrollTo({top:0,behavior:'smooth'});}
 function updateNavActive(page){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));let target=null;if(page===0)target=document.querySelector('[onclick*="goScreen(0)"]');else if(page==='s0-5')target=document.querySelector('[onclick*="s0-5"]');else if(page===3)target=document.querySelector('[onclick*="goScreen(3)"]');else if(page===2)target=document.querySelector('[onclick*="goScreen(2)"]');if(target)target.classList.add('active');}
 
 // S0
