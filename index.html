@@ -223,6 +223,8 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
 .kampus-akr{font-size:.65rem;font-weight:700;padding:1px 5px;border-radius:4px}
 .kampus-akr.unggul{background:rgba(34,197,94,.12);color:#22c55e}
 .kampus-akr.baik-sekali{background:rgba(245,158,11,.12);color:#f59e0b}
+.kampus-rank-badge{font-size:.62rem;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(99,102,241,.1);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
+.kampus-rank-badge.qs{background:rgba(245,158,11,.1);color:#f59e0b;border-color:rgba(245,158,11,.2)}
 
 /* ── IKIGAI QUICK ── */
 .ikigai-step{min-height:calc(100vh - 200px);display:flex;flex-direction:column;justify-content:center;animation:fadeIn .4s ease-out}
@@ -2356,34 +2358,86 @@ function renderPathway(careerId){
   renderKampus(careerId,'all');
 }
 
+// ranking nasional (Webometrics Indonesia 2024) & internasional (QS World 2025)
+const KAMPUS_RANK={
+  ui:    {nas:1,  qs:206},
+  itb:   {nas:2,  qs:275},
+  ugm:   {nas:3,  qs:352},
+  ipb:   {nas:4,  qs:601},
+  unair: {nas:5,  qs:521},
+  its:   {nas:6,  qs:801},
+  undip: {nas:7,  qs:801},
+  unpad: {nas:8,  qs:1001},
+  ub:    {nas:9,  qs:1001},
+  usu:   {nas:10, qs:null},
+  unhas: {nas:11, qs:null},
+  upi:   {nas:12, qs:null},
+  uny:   {nas:13, qs:null},
+  unj:   {nas:14, qs:null},
+  telkomuniv:{nas:15,qs:null},
+  uns:   {nas:16, qs:null},
+  unand: {nas:17, qs:null},
+  unsri: {nas:18, qs:null},
+  udayana:{nas:19,qs:null},
+  unram: {nas:20, qs:null},
+  binus: {nas:21, qs:1201},
+  uii:   {nas:25, qs:null},
+  trisakti:{nas:30,qs:null},
+  umy:   {nas:35, qs:null},
+  uph:   {nas:40, qs:null},
+  ukrida:{nas:45, qs:null},
+  yarsi: {nas:50, qs:null},
+  unissula:{nas:52,qs:null},
+  tarumanagara:{nas:55,qs:null},
+  ums:   {nas:58, qs:null},
+  umm:   {nas:60, qs:null},
+  ukdw:  {nas:65, qs:null},
+  unisba:{nas:68, qs:null},
+  umsu:  {nas:72, qs:null},
+};
+
 function getProdiUrl(univ,prodi){
   if(prodi.url)return prodi.url;
   return `https://${univ.id||'univ'}.ac.id`;
 }
-function renderKampus(careerId,filter){
+
+function renderKampus(careerId,filter,query){
   const sec=document.getElementById('kampus-section-'+careerId);
   if(!sec)return;
+  query=(query||'').toLowerCase();
   const matches=KAMPUS_DB.map(k=>{
     const relevantProdi=k.prodi.filter(p=>p.careers.includes(careerId));
     return relevantProdi.length?{...k,prodi:relevantProdi}:null;
   }).filter(Boolean);
-  const filtered=filter==='all'?matches:matches.filter(k=>k.tipe===filter);
+  const byType=filter==='all'?matches:matches.filter(k=>k.tipe===filter);
+  const filtered=query?byType.filter(k=>k.nama.toLowerCase().includes(query)||k.kota.toLowerCase().includes(query)):byType;
   if(!matches.length){sec.innerHTML='';return;}
   sec.innerHTML=`
     <div class="kampus-section">
       <div class="pathway-divider"></div>
-      <div class="kampus-section-title">Pilihan Kampus</div>
+      <div class="kampus-section-title">Pilihan Kampus <span style="color:var(--muted);font-weight:400">(${matches.length} tersedia)</span></div>
+      <input type="search" class="kampus-search" placeholder="Cari nama kampus atau kota..." value="${query}"
+        oninput="renderKampus('${careerId}','${filter}',this.value)"
+        style="width:100%;padding:9px 12px;border-radius:9px;border:1.5px solid var(--border);background:var(--bg-card);color:var(--text);font-family:inherit;font-size:.83rem;outline:none;margin-bottom:10px;transition:border-color .18s"
+        onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'"/>
       <div class="kampus-filter">
-        <button class="kampus-filter-btn${filter==='all'?' on':''}" onclick="renderKampus('${careerId}','all')">Semua</button>
-        <button class="kampus-filter-btn${filter==='negeri'?' on':''}" onclick="renderKampus('${careerId}','negeri')">Negeri</button>
-        <button class="kampus-filter-btn${filter==='swasta'?' on':''}" onclick="renderKampus('${careerId}','swasta')">Swasta</button>
+        <button class="kampus-filter-btn${filter==='all'?' on':''}" onclick="renderKampus('${careerId}','all','${query}')">Semua (${matches.length})</button>
+        <button class="kampus-filter-btn${filter==='negeri'?' on':''}" onclick="renderKampus('${careerId}','negeri','${query}')">Negeri (${matches.filter(k=>k.tipe==='negeri').length})</button>
+        <button class="kampus-filter-btn${filter==='swasta'?' on':''}" onclick="renderKampus('${careerId}','swasta','${query}')">Swasta (${matches.filter(k=>k.tipe==='swasta').length})</button>
       </div>
-      <div class="kampus-list">${filtered.map(k=>`
+      <div class="kampus-list">${filtered.length?filtered.map(k=>{
+        const r=KAMPUS_RANK[k.id]||{};
+        const rankBadges=(r.nas?`<span class="kampus-rank-badge">🇮🇩 #${r.nas}</span>`:'')+
+                         (r.qs?`<span class="kampus-rank-badge qs">QS #${r.qs}</span>`:'');
+        return`
         <a href="${getProdiUrl(k,k.prodi[0])}" target="_blank" rel="noopener noreferrer" class="kampus-card" style="text-decoration:none;display:block;color:inherit">
           <div class="kampus-card-head">
             <div>
               <div class="kampus-nama">${k.nama}</div>
-              <div class="kampus-kota">${k.kota}, ${k.provinsi}</div>
+              <div class="kampus-kota" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:3px">
+                <span>${k.kota}, ${k.provinsi}</span>
+                ${rankBadges}
+              </div>
             </div>
             <span class="kampus-tipe-badge ${k.tipe}">${k.tipe==='negeri'?'Negeri':'Swasta'}</span>
           </div>
@@ -2393,9 +2447,8 @@ function renderKampus(careerId,filter){
               <span class="kampus-akr ${p.akreditasi==='Unggul'?'unggul':'baik-sekali'}">${p.akreditasi==='Unggul'?'Unggul':'Baik Sekali'}</span>
             </div>`).join('')}
           </div>
-        </a>`).join('')}
+        </a>`;}).join(''):`<p style="text-align:center;font-size:.82rem;color:var(--muted);padding:16px">Tidak ditemukan — coba kata kunci lain</p>`}
       </div>
-      ${filtered.length<matches.length?`<p style="font-size:.72rem;color:var(--muted);margin-top:8px;text-align:center">${matches.length-filtered.length} kampus lainnya tersedia di filter lain</p>`:''}
     </div>
   `;
 }
