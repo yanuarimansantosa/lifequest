@@ -187,7 +187,7 @@ input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--
 .pathway-chevron{transition:transform .25s ease;color:var(--muted);flex-shrink:0}
 .pathway-accordion.open .pathway-chevron{transform:rotate(180deg)}
 .pathway-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
-.pathway-accordion.open .pathway-body{max-height:600px}
+.pathway-accordion.open .pathway-body{max-height:none}
 .pathway-inner{padding:0 18px 18px}
 .pathway-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:20px;font-size:.75rem;font-weight:700;margin-bottom:14px;border:1px solid}
 .pathway-badge.free{background:rgba(13,148,136,.12);color:#0d9488;border-color:rgba(13,148,136,.25)}
@@ -2143,6 +2143,30 @@ const KAMPUS_DB=[
     {nama:'Ilmu Komunikasi',akreditasi:'Baik Sekali',careers:['content','jurnalis','penulis','podcaster']},
     {nama:'Sastra Indonesia',akreditasi:'Baik Sekali',careers:['penulis']},
   ]},
+  // ── NEGERI FK TAMBAHAN ──
+  {id:'uns',nama:'Universitas Sebelas Maret',kota:'Surakarta',provinsi:'Jawa Tengah',tipe:'negeri',rank:16,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.uns.ac.id',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Gizi',akreditasi:'Unggul',url:'https://fk.uns.ac.id',careers:['ahli-gizi']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',url:'https://fk.uns.ac.id',careers:['perawat']},
+  ]},
+  {id:'unand',nama:'Universitas Andalas',kota:'Padang',provinsi:'Sumatera Barat',tipe:'negeri',rank:17,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.unand.ac.id',careers:['dokter','dokter-sp']},
+    {nama:'Farmasi',akreditasi:'Unggul',url:'https://farmasi.unand.ac.id',careers:['apoteker']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',url:'https://fk.unand.ac.id',careers:['perawat']},
+  ]},
+  {id:'unsri',nama:'Universitas Sriwijaya',kota:'Palembang',provinsi:'Sumatera Selatan',tipe:'negeri',rank:18,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.unsri.ac.id',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',url:'https://fk.unsri.ac.id',careers:['perawat']},
+  ]},
+  {id:'udayana',nama:'Universitas Udayana',kota:'Denpasar',provinsi:'Bali',tipe:'negeri',rank:19,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.unud.ac.id',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Kesehatan Masyarakat',akreditasi:'Unggul',url:'https://fkm.unud.ac.id',careers:['kesmas']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',url:'https://fk.unud.ac.id',careers:['perawat']},
+  ]},
+  {id:'unram',nama:'Universitas Mataram',kota:'Mataram',provinsi:'Nusa Tenggara Barat',tipe:'negeri',rank:20,prodi:[
+    {nama:'Kedokteran',akreditasi:'Baik Sekali',url:'https://fk.unram.ac.id',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',url:'https://fk.unram.ac.id',careers:['perawat']},
+  ]},
   // ── SWASTA ──
   {id:'binus',nama:'Bina Nusantara University',kota:'Jakarta',provinsi:'DKI Jakarta',tipe:'swasta',rank:1,prodi:[
     {nama:'Computer Science',akreditasi:'Unggul',careers:['software-eng','ai-eng','cybersec','game']},
@@ -2253,6 +2277,42 @@ const KAMPUS_DB=[
     {nama:'Arsitektur',akreditasi:'Baik Sekali',careers:['arsitek']},
     {nama:'Desain Interior',akreditasi:'Baik Sekali',careers:['interior']},
     {nama:'Desain Mode',akreditasi:'Baik Sekali',careers:['fashion']},
+  ]},
+  // ── SWASTA FK ──
+  {id:'uph',nama:'Universitas Pelita Harapan',kota:'Tangerang',provinsi:'Banten',tipe:'swasta',rank:21,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://www.uph.edu/id/fakultas/kedokteran',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',url:'https://www.uph.edu/id/fakultas/kedokteran',careers:['perawat']},
+  ]},
+  {id:'ukrida',nama:'Universitas Kristen Krida Wacana',kota:'Jakarta',provinsi:'DKI Jakarta',tipe:'swasta',rank:22,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://www.ukrida.ac.id/fakultas/kedokteran',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',url:'https://www.ukrida.ac.id',careers:['perawat']},
+  ]},
+  {id:'yarsi',nama:'Universitas YARSI',kota:'Jakarta',provinsi:'DKI Jakarta',tipe:'swasta',rank:23,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://www.yarsi.ac.id/fakultas-kedokteran',careers:['dokter','dokter-sp']},
+  ]},
+  {id:'unissula',nama:'Universitas Islam Sultan Agung',kota:'Semarang',provinsi:'Jawa Tengah',tipe:'swasta',rank:24,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.unissula.ac.id',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',url:'https://fk.unissula.ac.id',careers:['perawat']},
+  ]},
+  {id:'tarumanagara',nama:'Universitas Tarumanagara',kota:'Jakarta',provinsi:'DKI Jakarta',tipe:'swasta',rank:25,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.untar.ac.id',careers:['dokter','dokter-sp']},
+  ]},
+  {id:'ums',nama:'Universitas Muhammadiyah Surakarta',kota:'Surakarta',provinsi:'Jawa Tengah',tipe:'swasta',rank:26,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.ums.ac.id',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Gizi',akreditasi:'Baik Sekali',url:'https://fk.ums.ac.id',careers:['ahli-gizi']},
+  ]},
+  {id:'umm',nama:'Universitas Muhammadiyah Malang',kota:'Malang',provinsi:'Jawa Timur',tipe:'swasta',rank:27,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.umm.ac.id',careers:['dokter','dokter-sp']},
+    {nama:'Ilmu Keperawatan',akreditasi:'Baik Sekali',url:'https://fk.umm.ac.id',careers:['perawat']},
+  ]},
+  {id:'ukdw',nama:'Universitas Kristen Duta Wacana',kota:'Yogyakarta',provinsi:'DI Yogyakarta',tipe:'swasta',rank:28,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.ukdw.ac.id',careers:['dokter','dokter-sp']},
+  ]},
+  {id:'unisba',nama:'Universitas Islam Bandung',kota:'Bandung',provinsi:'Jawa Barat',tipe:'swasta',rank:29,prodi:[
+    {nama:'Kedokteran',akreditasi:'Unggul',url:'https://fk.unisba.ac.id',careers:['dokter','dokter-sp']},
+  ]},
+  {id:'umsu',nama:'Universitas Muhammadiyah Sumatera Utara',kota:'Medan',provinsi:'Sumatera Utara',tipe:'swasta',rank:30,prodi:[
+    {nama:'Kedokteran',akreditasi:'Baik Sekali',url:'https://fk.umsu.ac.id',careers:['dokter','dokter-sp']},
   ]},
 ];
 
